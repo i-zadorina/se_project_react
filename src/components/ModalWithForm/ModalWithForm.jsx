@@ -8,9 +8,9 @@ function ModalWithForm({children, buttonText,title, activeModal, handleCloseClic
     <button 
     onClick={handleCloseClick}
     type="button" 
-    className="modal__close">X</button>
+    className="modal__close"></button>
   <form className="modal__form">{children}
-    <button className="modal__submit" type='submit'>{buttonText}</button>
+    <button type='submit' className="modal__submit modal__submit_disabled" disabled>{buttonText}</button>
   </form>
   </div>
   </div>
