@@ -7,4 +7,8 @@ The idea of the application is pretty simple - we make a call to an API, which t
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
+<<<<<<< HEAD
 - [Page](https://i-zadorina.github.io/se_project_react/)
+=======
+- [Page](https://i-zadorina.github.io/se_project_react/)
+>>>>>>> 4878f781a2dc847d651b4e52759c3e00d5595de0
