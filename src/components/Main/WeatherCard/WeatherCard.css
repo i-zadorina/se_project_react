@@ -1,21 +1,21 @@
-.weather-card{
-    position: relative;
-    display: flex;
-    height: 80px;
-    border-radius: 12px;
-    overflow: hidden;
+.weather-card {
+  position: relative;
+  display: flex;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
 }
-.weather-card__temp{
-    font-size: 36px;
-    line-height: 1.1;
-    margin: 0;
-    color: #fff;
-    position: absolute;
-    top: 20px;
-    left: 16px;
+.weather-card__temp {
+  font-size: 36px;
+  line-height: 1.1;
+  margin: 0;
+  color: #fff;
+  position: absolute;
+  top: 20px;
+  left: 16px;
 }
-.weather-card__image{
-    object-fit: cover;
-    width: 100%;
-    object-position: right top;
+.weather-card__image {
+  object-fit: cover;
+  width: 100%;
+  object-position: right top;
 }
