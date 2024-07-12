@@ -1,0 +1,18 @@
+.modal__input{
+    margin-bottom: 24px;
+    padding: 0;
+}
+.modal__legend{
+    padding: 0;
+}
+.modal__radio-input{
+    padding: 0 0 8px 0;
+}
+.modal__label {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+.modal__label input[type="radio"]:checked + span {
+    color: black;
+  }

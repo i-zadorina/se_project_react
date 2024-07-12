@@ -1,0 +1,10 @@
+.clothes-section__labels{
+    display: flex;
+    gap: 20px;
+}
+.clothes-section__add-btn{
+    border: none;
+    color: #000;
+    opacity: .6;
+    cursor: pointer;
+}

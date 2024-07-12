@@ -21,3 +21,13 @@
   border-radius: 19px;
   border: 1px solid rgb(0, 0, 0, 0.3);
 }
+.card__delete-button {
+  position: absolute;
+  top: 25%;
+  left: 75%;
+  border: none;
+  background-color: transparent;
+}
+.card__delete-button:hover{
+  opacity: .6;
+}

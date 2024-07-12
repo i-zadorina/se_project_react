@@ -1,3 +1,14 @@
+export const coordinates = {
+  // England:
+  latitude: 51.853294,
+  longitude: -4.305573,
+  // Tel Aviv:
+  // latitude: 32.109333,
+  // longitude: 34.855499,
+}
+
+export const APIkey = "a054fb4cb3f3b71d4a96d2ff376d1d77";
+
 export const defaultWeatherOptions = {
   day: {
     url: new URL("../images/day/default.png", import.meta.url).href,
@@ -107,10 +118,3 @@ export const defaultClothingItems = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
   },
 ];
-
-export const coordinates = {
-  latitude: 51.853294,
-  longitude: -4.305573,
-};
-
-export const APIkey = "a054fb4cb3f3b71d4a96d2ff376d1d77";

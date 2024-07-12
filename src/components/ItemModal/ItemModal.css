@@ -2,13 +2,13 @@
   width: 100%;
   border-radius: 16px 16px 0 0;
 }
-.modal__content_type_image {
+.modal__content-items {
   padding: 0;
   border-radius: 16px;
   width: 498px;
   height: 610px;
 }
-.modal__close_type_image {
+.modal__item-close {
   background-image: url(../../images/close-preview.png);
   border: none;
   position: absolute;
@@ -26,4 +26,14 @@
 .modal__weather {
   padding: 12px 0 0 0;
   margin: 0;
+}
+.button__delete-card {
+  position: absolute;
+  top: 25%;
+  left: 75%;
+  border: none;
+  background-color: transparent;
+}
+.button__delete-card:hover {
+  opacity: 0.6;
 }
