@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "http://localhost:3000";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -8,20 +8,23 @@ function checkResponse(res) {
 }
 
 function getItems() {
-  return fetch(`${baseUrl}/items`,{
-    headers: {
-      "Content-Type": "application/json", 
-    }
-  }
+  return fetch(`${baseUrl}/items`
+  //   ,{
+  //   headers: {
+  //     "Content-Type": "application/json", 
+  //   }
+  // }
   ).then(checkResponse);
 }
 
-function createCard({name, imageUrl, weather}) {
+function createCard({ name, imageUrl, weather }) {
   console.log(name, imageUrl, weather);
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({name, imageUrl, weather})
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, imageUrl, weather }),
   }).then(checkResponse);
 }
 
