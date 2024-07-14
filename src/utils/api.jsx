@@ -7,32 +7,29 @@ function checkResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-function request(url, options) {
-  return fetch(url, options).then(checkResponse);
-}
-
 function getItems() {
-  return request(`${baseUrl}/items`);
-}
-
-function createCard({ name, imageUrl, weather }) {
-  return request(`${baseUrl}/items`, {
-    method: "POST",
+  return fetch(`${baseUrl}/items`,{
     headers: {
       "Content-Type": "application/json", 
-    },
-    body: JSON.stringify({
-      name,
-      imageUrl,
-      weather,
-    }),
-  });
+    }
+  }
+  ).then(checkResponse);
+}
+
+function createCard({name, imageUrl, weather}) {
+  console.log(name, imageUrl, weather);
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({name, imageUrl, weather})
+  }).then(checkResponse);
 }
 
 function deleteCard(cardId) {
-  return request(`${baseUrl}/items/${cardId}`, {
+  return fetch(`${baseUrl}/items/${cardId}`, {
     method: "DELETE",
-  });
+    headers: {"Content-Type": "application/json"},
+  }).then(checkResponse);
 }
 
 export { getItems, createCard, deleteCard, checkResponse };

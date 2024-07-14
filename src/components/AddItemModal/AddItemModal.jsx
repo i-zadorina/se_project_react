@@ -5,7 +5,6 @@ import "./AddItemModal.css";
 const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
 
@@ -16,13 +15,12 @@ const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
 
   const [weather, setWeather] = useState("");
   const handleWeatherChange = (e) => {
-    console.log(e.target.value);
     setWeather(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    onAddItem({name, imageUrl, weather});
   };
 
   return (

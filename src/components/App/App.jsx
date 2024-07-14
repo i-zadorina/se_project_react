@@ -36,16 +36,17 @@ function App() {
     setActiveModal("");
   };
   const onAddItem = (values) => {
-    createCard(values)
+    return createCard(values)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error adding item:", error);});
   };
 
   const onDeleteItem = (cardId) => {
-    deleteCard(cardId)
+    return deleteCard(cardId)
       .then(() => {
         const updatedClothingItems = clothingItems.filter((item) => {
           return item._id !== cardId;
@@ -88,7 +89,7 @@ function App() {
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
           <Routes>
             <Route
-              path="/"
+              exact path="/"
               element={
                 //pass clothingItems as prop
                 <Main

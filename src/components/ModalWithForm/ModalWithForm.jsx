@@ -11,12 +11,10 @@ function ModalWithForm({
 }) {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
-      {/* <div className={`modal__content modal__content_type_${name}`}> */}
         <div className="modal__content">
         <h2 className="modal__title">{titleText}</h2>
         <button
           onClick={onClose}
-          // className="modal__close modal__close_type_grey"
           className="modal__close"
           type="button"
         />
