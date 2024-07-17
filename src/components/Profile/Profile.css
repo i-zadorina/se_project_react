@@ -1,5 +1,12 @@
 .profile {
-    display: flex;
-    flex-direction: row;
-    gap: 116px;
-  }
+  display: flex;
+  flex-direction: row;
+  /* gap: 116px; */
+  flex-wrap: nowrap;
+}
+.profile__sidebar {
+  width: 229px;
+}
+/* .profile__clothing-its{
+  padding-left: 385px;
+} */

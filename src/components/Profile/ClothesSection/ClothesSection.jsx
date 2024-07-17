@@ -16,7 +16,7 @@ const ClothesSection = ({ handleAddClick, onCardClick, clothingItems }) => {
           + Add new
         </button>
       </div>
-      <ul className="clothes-section__items">
+      <ul className="clothes-section__item">
         {clothingItems.map((item) => {
           return (
             <ItemCard key={item._id} item={item} onCardClick={onCardClick} />

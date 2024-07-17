@@ -1,6 +1,12 @@
 .clothes-section__labels{
     display: flex;
+}
+.clothes-section__item{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 229px);
+    justify-content: center;
     gap: 20px;
+    padding: 0;
 }
 .clothes-section__add-btn{
     border: none;
