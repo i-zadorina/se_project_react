@@ -11,6 +11,7 @@ import { coordinates, APIkey } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, createCard, deleteCard } from "../../utils/api";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
 function App() {
   //useState hooks
@@ -31,7 +32,7 @@ function App() {
   };
   const handleAddClick = () => {
     setActiveModal("add-garment");
-  }; 
+  };
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -42,7 +43,8 @@ function App() {
         closeActiveModal();
       })
       .catch((error) => {
-        console.error("Error adding item:", error);});
+        console.error("Error adding item:", error);
+      });
   };
 
   const onDeleteItem = (cardId) => {
@@ -57,11 +59,16 @@ function App() {
       .catch(console.error);
   };
 
+  const onDeleteConfirm = (cardId) => {
+    setActiveModal("delete-confirmation");
+    setSelectedCard(cardId);
+  }
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
-// useEffect
+  // useEffect
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -89,7 +96,8 @@ function App() {
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
           <Routes>
             <Route
-              exact path="/"
+              exact
+              path="/"
               element={
                 //pass clothingItems as prop
                 <Main
@@ -118,6 +126,12 @@ function App() {
           onAddItem={onAddItem}
         />
         <ItemModal
+          activeModal={activeModal}
+          card={selectedCard}
+          onClose={closeActiveModal}
+          onDeleteConfirm={onDeleteConfirm}
+        />
+        <ConfirmDeleteModal
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}

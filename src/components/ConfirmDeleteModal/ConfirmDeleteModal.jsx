@@ -1,50 +1,46 @@
 import './ConfirmDeleteModal.css';
 
-function ConfirmDeleteModal ({
-  closeActiveModal,
-  isOpen,
-  onSubmit,
-  handleCardDelete,
-  confirmDeleteModal,
+const ConfirmDeleteModal = ({
+  onClose,
+  activeModal,
+  onDeleteItem,
   card
-}) {
-
-  const deleteCard = (e) => {
-    e.preventDefault();
-    handleCardDelete(card);
-  };
+}) => {
+  const buttonConfirmText = "Yes, delete item";
+  const buttonCancel = "Cancel";
 
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`}>
+    <div className={`modal ${activeModal === "delete-confirmation" && "modal_opened"}`}>
       <div className="confirm-delete-modal">
         <button
-          onClick={closeActiveModal}
-          type="button"
           className="confirm-delete-modal__close-btn"
+          type="button"
+          onClick={onClose}
         ></button>
-        <div className="confirm-delete-modal__desc">
+        <div className="confirm-delete-modal__container">
           <p>
-            <span className="confirm-delete-modal__prompt">
+            <span className="confirm-delete-modal__text">
               Are you sure you want to delete this item?
             </span>
-            <span className="confirm-delete-modal__prompt">
+            <span className="confirm-delete-modal__text">
               This action is irreversible
             </span>
           </p>
           <button
-            onClick={deleteCard}
+            className="confirm-delete-modal__delete"
             type="submit"
-            className="confirm-delete-modal__close"
+            onClick={() => onDeleteItem(card)}
           >
-            Yes, delete item
+            {buttonConfirmText}
           </button>
           <button
-            onClick={closeActiveModal}
             className="confirm-delete-modal__cancel"
             type="button"
+            onClick={onClose}
           >
-            Cancel
+            {buttonCancel}
           </button>
+          <p className="confirm-delete-modal__item-id">{card._id}</p>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.confirm-delete-modal__desc {
+.confirm-delete-modal__container {
     max-width: auto;
     display: flex;
     justify-content: center;
@@ -16,11 +16,12 @@
     margin-top: 60px;
 }
 
-.confirm-delete-modal__close {
+.confirm-delete-modal__delete {
     margin-top: 30px;
     background-color: transparent;
     border: none;
     color: #FF4D00;
+    cursor: pointer;
 }
 
 .confirm-delete-modal__close:hover {
@@ -31,13 +32,14 @@
     margin-top: 20px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .confirm-delete-modal__cancel:hover {
     opacity: 0.6;
 }
 
-.confirm-delete-modal__prompt {
+.confirm-delete-modal__text {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +50,7 @@
   position: absolute;
   right: 20px;
   top: 20px;
-  background-image: url("../../assets/close-button-gray.svg");
+  background-image: url("../../images/close.svg");
   height: 20px;
   width: 20px;
   border: none;
