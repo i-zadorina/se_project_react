@@ -7,7 +7,7 @@ const ClothesSection = ({ handleAddClick, onCardClick, clothingItems }) => {
   return (
     <div className="clothes-section">
       <div className="clothes-section__labels">
-        <p className="clothes-section__items">Your items</p>
+        <p className="clothes-section__title">Your items</p>
         <button
           onClick={handleAddClick}
           type="button"
@@ -16,7 +16,7 @@ const ClothesSection = ({ handleAddClick, onCardClick, clothingItems }) => {
           + Add new
         </button>
       </div>
-      <ul className="clothes-section__item">
+      <ul className="clothes-section__items">
         {clothingItems.map((item) => {
           return (
             <ItemCard key={item._id} item={item} onCardClick={onCardClick} />

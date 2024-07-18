@@ -45,6 +45,7 @@
   border: none;
   background-image: url(../../images/close.svg);
   cursor: pointer;
+  background-color: transparent;
 }
 .modal__form {
   display: flex;

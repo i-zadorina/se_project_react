@@ -1,12 +1,12 @@
 .profile {
   display: flex;
-  flex-direction: row;
-  /* gap: 116px; */
-  flex-wrap: nowrap;
+  gap: 116px;
 }
 .profile__sidebar {
-  width: 229px;
+  text-wrap: nowrap;
 }
-/* .profile__clothing-its{
-  padding-left: 385px;
-} */
+.profile__clothing-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

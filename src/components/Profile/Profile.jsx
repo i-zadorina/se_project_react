@@ -9,7 +9,7 @@ const Profile = ({ handleAddClick, onCardClick, clothingItems }) => {
       <section className="profile__sidebar">
         <SideBar />
       </section>
-      <section className="profile__clothing-its">
+      <section className="profile__clothing-items">
         <ClothesSection
           handleAddClick={handleAddClick}
           onCardClick={onCardClick}
