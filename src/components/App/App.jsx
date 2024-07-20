@@ -36,6 +36,22 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+  // handle Escape Close
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
   const onAddItem = (values) => {
     return createCard(values)
       .then((newItem) => {
@@ -62,7 +78,7 @@ function App() {
   const onDeleteConfirm = (cardId) => {
     setActiveModal("delete-confirmation");
     setSelectedCard(cardId);
-  }
+  };
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
