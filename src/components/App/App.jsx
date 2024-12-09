@@ -141,6 +141,7 @@ function App() {
         setToken(res.token);
         setIsLoggedIn(true);
         auth.getUserInfo(res.token).then((res) => setCurrentUser(res.user));
+        // console.log(currentUser);
         closeActiveModal();
         // const redirectPath = location.state?.from?.pathname || "/profile";
         // navigate(redirectPath);
@@ -171,7 +172,7 @@ function App() {
     auth
       .getUserInfo(jwt)
       .then((res) => {
-        setCurrentUser(res.user);
+        setCurrentUser(res);
         setIsLoggedIn(true);
         // const redirectPath = location.state?.from?.pathname || "/";
         // navigate(redirectPath);

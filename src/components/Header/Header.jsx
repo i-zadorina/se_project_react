@@ -11,13 +11,14 @@ function Header({
   handleRegisterClick,
   handleLoginClick,
   weatherData,
+  isLoggedIn,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <header className="header">
