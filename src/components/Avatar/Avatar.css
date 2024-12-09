@@ -1,0 +1,45 @@
+.avatar {
+  height: 40px;
+  width: 40px;
+  margin-left: 12px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.avatar__placeholder {
+  height: 40px;
+  width: 40px;
+  margin-left: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  background-color: #000;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.avatar__sidebar {
+  width: 56px;
+  height: 56px;
+  margin: 0;
+}
+
+.avatar__placeholder_sidebar {
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "CabinetGrotesk-Bold";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  background-color: #000;
+  border-radius: 50%;
+  color: #fff;
+}

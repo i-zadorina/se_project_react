@@ -3,10 +3,12 @@
   gap: 116px;
 }
 .profile__sidebar {
-  text-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
 }
 .profile__clothing-items {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  /* width: 100%; */
 }

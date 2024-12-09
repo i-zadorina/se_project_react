@@ -1,28 +1,31 @@
-import React, { useState } from "react";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/UseForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
 
-const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
-  const { values, handleChange, resetForm } = useForm({
+const AddItemModal = ({ onAddItem, onClose, isOpen }) => {
+  const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
   });
 
+  const handleWeatherType = (e) => {
+    setValues({ ...values, weather: e.target.id });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItem(values);
-    resetForm();
+    onClose();
+    // resetForm();
   };
 
   return (
     <ModalWithForm
       titleText="New garment"
       buttonText="Add garment"
-      activeModal={activeModal}
-      onClose={closeActiveModal}
-      isOpen={activeModal === "add-garment"}
+      onClose={onClose}
+      isOpen={isOpen}
       name={"addgarment"}
       onSubmit={handleSubmit}
     >
@@ -60,7 +63,7 @@ const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
             className="modal__radio-input"
             value="hot"
             checked={values.weather === "hot"}
-            onChange={handleChange}
+            onChange={handleWeatherType}
           />{" "}
           Hot
         </label>
@@ -72,7 +75,7 @@ const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
             className="modal__radio-input"
             value="warm"
             checked={values.weather === "warm"}
-            onChange={handleChange}
+            onChange={handleWeatherType}
           />{" "}
           Warm
         </label>
@@ -84,7 +87,7 @@ const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
             className="modal__radio-input"
             value="cold"
             checked={values.weather === "cold"}
-            onChange={handleChange}
+            onChange={handleWeatherType}
           />{" "}
           Cold
         </label>

@@ -25,6 +25,10 @@
   display: flex;
   flex-direction: row;
 }
+.modal__footer_own {
+  display: flex;
+  justify-content: space-around;
+}
 .modal__caption {
   padding: 0;
   margin: 0;
@@ -41,14 +45,14 @@
   font-weight: 700;
   font-family: "Grotesk", Arial, sans-serif;
 }
-.modal__left-section{
+.modal__left-section {
   padding: 0;
   margin: 20px auto 32px 32px;
 }
-.modal__right-section{
+.modal__right-section {
   margin: 20px 32px auto auto;
 }
-.modal__delete_type_preview {
+.modal__delete-button {
   border: none;
   background-color: #fff;
   font-size: 20px;
@@ -58,7 +62,13 @@
   color: #ff4d00;
   opacity: 1;
 }
-.modal__delete_type_preview:hover {
+.modal__delete-button:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+.modal__delete-button_visible {
+  display: flex;
+}
+.modal__delete-button_hidden {
+  display: none;
 }

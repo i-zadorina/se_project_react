@@ -1,11 +1,9 @@
-export const coordinates = {
-  // England:
-  // latitude: 51.853294,
-  // longitude: -4.305573,
-  // Tel Aviv:
-  latitude: 32.109333,
-  longitude: 34.855499,
-}
+export const latitude = 32.109333;
+// England:
+// latitude: 51.853294,
+// longitude: -4.305573,
+// Tel Aviv:
+export const longitude = 34.855499;
 
 export const APIkey = "a054fb4cb3f3b71d4a96d2ff376d1d77";
 

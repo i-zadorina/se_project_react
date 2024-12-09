@@ -1,13 +1,19 @@
-.sidebar {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  height: 56px;
-}
 .sidebar__username {
   line-height: 1.24;
   margin: 0;
   display: flex;
   align-items: center;
   width: 157px;
+}
+.sidebar__button {
+  margin-top: 8px;
+  padding: 0;
+  border: none;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.24;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
 }
