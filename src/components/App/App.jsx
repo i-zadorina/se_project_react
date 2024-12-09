@@ -138,13 +138,9 @@ function App() {
     auth
       .signIn({ email, password })
       .then((res) => {
+        setToken(res.token);
         setIsLoggedIn(true);
-        setCurrentUser({
-          id: res._id,
-          name: res.name,
-          avatar: res.avatar,
-        });
-        setToken();
+        auth.getUserInfo(res.token).then((res) => setCurrentUser(res.user));
         closeActiveModal();
         // const redirectPath = location.state?.from?.pathname || "/profile";
         // navigate(redirectPath);

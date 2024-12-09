@@ -1,4 +1,7 @@
 import { checkResponse, baseUrl } from "./api";
+import { getToken } from "./token";
+
+const token = getToken();
 
 function signUp({ name, avatar, email, password }) {
   return fetch(`${baseUrl}/signup`, {
