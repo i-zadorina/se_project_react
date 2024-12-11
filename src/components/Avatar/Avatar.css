@@ -1,7 +1,6 @@
 .avatar {
   height: 40px;
   width: 40px;
-  margin-left: 12px;
   border-radius: 50%;
   text-decoration: none;
 }
@@ -9,15 +8,15 @@
 .avatar__placeholder {
   height: 40px;
   width: 40px;
-  margin-left: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "CabinetGrotesk-Bold";
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
-  line-height: 25px;
+  line-height: 1.25;
   background-color: #000;
+  opacity: 0.2;
   border-radius: 50%;
   color: #fff;
 }
@@ -35,10 +34,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "CabinetGrotesk-Bold";
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
-  line-height: 25px;
+  line-height: 1.25;
   background-color: #000;
   border-radius: 50%;
   color: #fff;

@@ -6,8 +6,9 @@ import "./Profile.css";
 const Profile = ({
   handleAddClick,
   onCardClick,
-  clothingItems,
+  defaultClothingItems,
   handleLogOut,
+  setIsLoggedIn,
   isLoggedIn,
   handleEditClick,
   onCardLike,
@@ -17,7 +18,7 @@ const Profile = ({
       <section className="profile__sidebar">
         <SideBar
           handleLogOut={handleLogOut}
-          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
           handleEditClick={handleEditClick}
         />
       </section>
@@ -25,7 +26,7 @@ const Profile = ({
         <ClothesSection
           handleAddClick={handleAddClick}
           onCardClick={onCardClick}
-          clothingItems={clothingItems}
+          defaultClothingItems={defaultClothingItems}
           isLoggedIn={isLoggedIn}
           onCardLike={onCardLike}
         />

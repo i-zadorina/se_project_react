@@ -3,13 +3,13 @@ import { getToken } from "./token";
 
 const token = getToken();
 
-function signUp({ name, avatar, email, password }) {
+function signUp({ name, avatarURL, email, password }) {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, avatar, email, password }),
+    body: JSON.stringify({ name, avatarURL, email, password }),
   }).then(checkResponse);
 }
 
@@ -23,14 +23,14 @@ function signIn({ email, password }) {
   }).then(checkResponse);
 }
 
-const editUserInfo = ({ name, avatar }, token) => {
+const editUserInfo = ({ name, avatarURL }, token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name, avatar }),
+    body: JSON.stringify({ name, avatarURL }),
   }).then(checkResponse);
 };
 

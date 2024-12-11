@@ -1,10 +1,10 @@
 import "./Avatar.css";
 import avatar from "../../images/avatar.svg";
 import { useState, useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export default function Avatar({ isSidebar }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const [hasError, setHasError] = useState(false);
 
   return (
@@ -27,18 +27,4 @@ export default function Avatar({ isSidebar }) {
       )}
     </>
   );
-}
-
-{
-  /* {currentUser.avatar ? (
-                  <img
-                    className="header__avatar"
-                    src={currentUser.avatar}
-                    alt="avatar"
-                  />
-                ) : (
-                  <span className="header__avatar header__avatar_none">
-                    {user.name?.toUpperCase().charAt(0) || ""}
-                  </span>
-                )} */
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./SideBar.css";
 
 const SideBar = ({ handleEditClick, handleLogOut }) => {

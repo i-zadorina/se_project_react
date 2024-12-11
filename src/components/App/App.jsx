@@ -32,7 +32,7 @@ import Register from "../RegisterModal/RegisterModal";
 import Login from "../Login/LoginModal";
 import { setToken, getToken, removeToken } from "../../utils/token";
 import AppContext from "../../contexts/AppContext";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   //useState hooks
@@ -54,20 +54,13 @@ function App() {
             C: Math.round(((data.main.temp - 32) * 5) / 9),
           },
         };
-        // const locationName = data.name;
-        // setLocation(locationName);
-        // setWeatherData(weather);
-        // const sunriseData = data.sys.sunrise;
-        // setSunrise(sunriseData);
-        // const sunsetData = data.sys.sunset;
-        // setSunset(sunsetData);
       })
       .catch(console.error);
   }, []);
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [clothingItems, setClothingItems] = useState([]);
+  const [defaultClothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [currentUser, setCurrentUser] = useState({
@@ -124,7 +117,6 @@ function App() {
       .signUp({ name, avatar, email, password })
       .then(() => {
         handleLogin({ email, password });
-        // setIsLoggedIn(true);
         closeActiveModal();
         navigate("/profile");
       })
@@ -140,8 +132,8 @@ function App() {
       .then((res) => {
         setToken(res.token);
         setIsLoggedIn(true);
-        auth.getUserInfo(res.token).then((res) => setCurrentUser(res.user));
-        // console.log(currentUser);
+        auth.getUserInfo(res.token).then((res) => setCurrentUser(res.data));
+        console.log(res.data);
         closeActiveModal();
         // const redirectPath = location.state?.from?.pathname || "/profile";
         // navigate(redirectPath);
@@ -172,7 +164,7 @@ function App() {
     auth
       .getUserInfo(jwt)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         setIsLoggedIn(true);
         // const redirectPath = location.state?.from?.pathname || "/";
         // navigate(redirectPath);
@@ -181,21 +173,27 @@ function App() {
   }, [isLoggedIn]);
 
   //Cards, Items
-  const handleCardLike = ({ id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
-    return !isLiked
-      ? addCardLike(id, token)
+  const handleCardLike = ({ _id, isLiked }) => {
+    const id = _id;
+    const jwt = getToken();
+
+    !isLiked
+      ? addCardLike(id, jwt)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+            setClothingItems((defaultClothingItems) =>
+              defaultClothingItems?.map((item) =>
+                item._id === id ? updatedCard : item
+              )
             );
             setIsLiked(true);
           })
           .catch((err) => console.log(err))
-      : removeCardLike(id, token)
+      : removeCardLike(id, jwt)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+            setClothingItems((defaultClothingItems) =>
+              defaultClothingItems?.map((item) =>
+                item._id === id ? updatedCard : item
+              )
             );
             setIsLiked(false);
           })
@@ -206,7 +204,7 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     addItem(values, jwt)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems([newItem, ...defaultClothingItems]);
         closeActiveModal();
       })
       .catch((error) => {
@@ -217,7 +215,7 @@ function App() {
   const onDeleteItem = (cardId) => {
     return deleteCard(cardId)
       .then(() => {
-        const updatedClothingItems = clothingItems.filter((item) => {
+        const updatedClothingItems = defaultClothingItems.filter((item) => {
           return item._id !== cardId;
         });
         setClothingItems(updatedClothingItems);
@@ -256,7 +254,7 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
+    <CurrentUserContext.Provider value={{ currentUser }}>
       <AppContext.Provider value={{ isLoggedIn, setCurrentUser }}>
         <div className="page">
           <CurrentTemperatureUnitContext.Provider
@@ -281,7 +279,7 @@ function App() {
                       weatherData={weatherData}
                       weatherTemp={temp}
                       onCardClick={handleCardClick}
-                      clothingItems={clothingItems}
+                      updatedClothingItems={defaultClothingItems}
                       onCardLike={handleCardLike}
                       isLiked={isLiked}
                     />
@@ -290,11 +288,11 @@ function App() {
                 <Route
                   path="/profile"
                   element={
-                    <ProtectedRoute anonymous={isLoggedIn}>
+                    <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <Profile
                         handleAddClick={handleAddClick}
                         onCardClick={handleCardClick}
-                        clothingItems={clothingItems}
+                        defaultClothingItems={defaultClothingItems}
                         handleEditClick={handleEditClick}
                         handleUpdateUser={handleUpdateUser}
                         // isLoggedIn={isLoggedIn}

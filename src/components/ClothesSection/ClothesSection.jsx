@@ -1,13 +1,18 @@
 import React from "react";
+import { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
 const ClothesSection = ({
   handleAddClick,
   onCardClick,
-  clothingItems,
+  defaultClothingItems,
   onCardLiked,
 }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const userItems = defaultClothingItems?.filter(
+    (item) => item.owner === currentUser?._id
+  );
   return (
     <section className="clothes-section">
       <div className="clothes-section__labels">
@@ -21,10 +26,10 @@ const ClothesSection = ({
         </button>
       </div>
       <ul className="clothes-section__items">
-        {clothingItems.map((item) => {
+        {userItems?.map((item) => {
           return (
             <ItemCard
-              key={item._id}
+              key={item._id || item.id}
               item={item}
               onCardClick={onCardClick}
               onCardLiked={onCardLiked}
