@@ -1,5 +1,5 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
@@ -7,32 +7,34 @@ const ClothesSection = ({
   handleAddClick,
   onCardClick,
   defaultClothingItems,
-  onCardLiked,
+  onCardLike,
 }) => {
   const currentUser = useContext(CurrentUserContext);
-  const userItems = defaultClothingItems?.filter(
-    (item) => item.owner === currentUser?._id
+
+  const userItems = defaultClothingItems.filter(
+    (item) => item.owner === currentUser._id
   );
+
   return (
     <section className="clothes-section">
       <div className="clothes-section__labels">
         <p className="clothes-section__title">Your items</p>
         <button
+          className="clothes-section__add-btn"
           onClick={handleAddClick}
           type="button"
-          className="clothes-section__add-btn"
         >
           + Add new
         </button>
       </div>
       <ul className="clothes-section__items">
-        {userItems?.map((item) => {
+        {userItems.map((item) => {
           return (
             <ItemCard
-              key={item._id || item.id}
+              key={item._id}
               item={item}
               onCardClick={onCardClick}
-              onCardLiked={onCardLiked}
+              onCardLike={onCardLike}
             />
           );
         })}

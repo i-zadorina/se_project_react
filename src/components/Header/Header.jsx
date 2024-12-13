@@ -1,23 +1,23 @@
-import "./Header.css";
-import logo from "../../images/logo.svg";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
-import Avatar from "../Avatar/Avatar";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import logo from "../../images/logo.svg";
+import "./Header.css";
 
 function Header({
   handleAddClick,
   handleRegisterClick,
   handleLoginClick,
   weatherData,
+  isLoggedIn,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -42,7 +42,17 @@ function Header({
             </button>
             <Link to="/profile" className="header__link">
               <p className="header__username">{currentUser?.name}</p>
-              <Avatar />
+              {currentUser.avatar ? (
+                <img
+                  className="header__avatar"
+                  src={currentUser.avatar}
+                  alt="Avatar"
+                />
+              ) : (
+                <div className="header__avatar-placeholder">
+                  {currentUser.name.split("")[0]}
+                </div>
+              )}
             </Link>
           </div>
         ) : (
@@ -55,9 +65,9 @@ function Header({
               Sign Up
             </button>
             <button
-              onClick={handleLoginClick}
-              type="button"
               className="header__login-btn"
+              type="button"
+              onClick={handleLoginClick}
             >
               Log In
             </button>

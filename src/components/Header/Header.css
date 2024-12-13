@@ -27,6 +27,40 @@
   flex-direction: row;
   gap: 20px;
 }
+.header__add-btn {
+  margin: 0 8px 0 8px;
+  padding: 0;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.header__link {
+  display: flex;
+  text-decoration: none;
+  color: #000;
+  align-items: center;
+  gap: 20px;
+}
+.header__username {
+  margin: 0;
+  color: #000;
+  text-decoration: none;
+}
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.header__avatar-placeholder {
+  border-color: #000;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+}
 .header__signup-btn {
   margin: 0 20px 0 0;
   padding: 0;
@@ -45,38 +79,5 @@
   font-weight: 700;
   font-size: 1em;
   line-height: 1.5;
-  cursor: pointer;
-}
-
-.header__link {
-  display: flex;
-  text-decoration: none;
-  color: #000;
-  align-items: center;
-  gap: 20px;
-}
-.header__username {
-  margin: 0;
-  color: #000;
-  text-decoration: none;
-}
-.header__avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border-color: #000;
-  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.2;
-}
-.header__add-btn {
-  margin: 0 8px 0 8px;
-  padding: 0;
-  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  line-height: 1.2;
-  border: none;
-  background: none;
   cursor: pointer;
 }

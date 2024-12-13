@@ -6,30 +6,30 @@ import "./SideBar.css";
 const SideBar = ({ handleEditClick, handleLogOut }) => {
   const { currentUser } = useContext(CurrentUserContext);
   return (
-    <div className="sidebar">
+    <section className="sidebar">
       <img
         className="sidebar__avatar"
-        src={currentUser?.avatar}
+        src={currentUser.avatar}
         alt="Default avatar"
       />
-      <p className="sidebar__username">{currentUser?.name}</p>
-      <li>
+      <p className="sidebar__username">{currentUser.name}</p>
+      <div className="sidebar__buttons">
         <button
-          onClick={handleEditClick}
-          type="button"
           className="sidebar__button"
+          type="button"
+          onClick={handleEditClick}
         >
           Change profile data
         </button>
         <button
-          type="button"
           className="sidebar__button"
+          type="button"
           onClick={handleLogOut}
         >
           Log out
         </button>
-      </li>
-    </div>
+      </div>
+    </section>
   );
 };
 

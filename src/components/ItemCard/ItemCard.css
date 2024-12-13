@@ -9,9 +9,16 @@
   margin-top: 15px;
   overflow: hidden;
 }
-.card__name {
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 15px;
+  margin: 0;
+  gap: 10px;
+}
+.card__name {
   margin: 0;
   font-size: 16px;
   line-height: 1.25;
@@ -37,16 +44,25 @@
 .card__delete-button:hover {
   opacity: 0.6;
 }
-.like-button__icon {
-  position: absolute;
-  margin-left: 230px;
-  margin-bottom: 240px;
-  color: #00000099;
-  border: 2px;
+.card__like {
   width: 18px;
   height: 15px;
+  background-color: transparent;
+  border: 0;
+  background-image: url(../../images/like.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
-.card__header {
-  display: flex;
-  align-items: center;
+
+.card__like_visible {
+  visibility: visible;
+}
+
+.card__like_hidden {
+  visibility: hidden;
+}
+
+.card__like_liked {
+  background-image: url(../../images/liked.png);
 }

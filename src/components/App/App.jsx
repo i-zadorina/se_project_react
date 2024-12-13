@@ -60,9 +60,8 @@ function App() {
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [defaultClothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     _id: "",
     name: "",
@@ -132,8 +131,9 @@ function App() {
       .then((res) => {
         setToken(res.token);
         setIsLoggedIn(true);
-        auth.getUserInfo(res.token).then((res) => setCurrentUser(res.data));
-        console.log(res.data);
+        auth.getUserInfo(res.token).then((res) => {
+          setCurrentUser(res.data);
+        });
         closeActiveModal();
         // const redirectPath = location.state?.from?.pathname || "/profile";
         // navigate(redirectPath);
@@ -185,7 +185,7 @@ function App() {
                 item._id === id ? updatedCard : item
               )
             );
-            setIsLiked(true);
+            // setIsLiked(true);
           })
           .catch((err) => console.log(err))
       : removeCardLike(id, jwt)
@@ -195,7 +195,7 @@ function App() {
                 item._id === id ? updatedCard : item
               )
             );
-            setIsLiked(false);
+            // setIsLiked(false);
           })
           .catch((err) => console.log(err));
   };
@@ -204,7 +204,7 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     addItem(values, jwt)
       .then((newItem) => {
-        setClothingItems([newItem, ...defaultClothingItems]);
+        setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
       })
       .catch((error) => {
@@ -212,13 +212,14 @@ function App() {
       });
   };
 
-  const onDeleteItem = (cardId) => {
-    return deleteCard(cardId)
+  const onDeleteItem = () => {
+    return deleteCard(selectedCard._id)
       .then(() => {
-        const updatedClothingItems = defaultClothingItems.filter((item) => {
-          return item._id !== cardId;
-        });
-        setClothingItems(updatedClothingItems);
+        setClothingItems(
+          clothingItems.filter((item) => {
+            return item._id !== selectedCard._id;
+          })
+        );
         closeActiveModal();
       })
       .catch(console.error);
@@ -231,7 +232,7 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then(({ data }) => {
+      .then((data) => {
         setClothingItems(data.reverse());
       })
       .catch(console.error);
@@ -267,8 +268,6 @@ function App() {
                 handleLoginClick={handleLoginClick}
                 weatherLocation={weatherLocation}
                 weatherData={weatherData}
-                currentUser={currentUser}
-                isLoggedIn={isLoggedIn}
               />
               <Routes>
                 <Route
@@ -279,9 +278,8 @@ function App() {
                       weatherData={weatherData}
                       weatherTemp={temp}
                       onCardClick={handleCardClick}
-                      updatedClothingItems={defaultClothingItems}
+                      defaultClothingItems={clothingItems}
                       onCardLike={handleCardLike}
-                      isLiked={isLiked}
                     />
                   }
                 />
@@ -290,14 +288,11 @@ function App() {
                   element={
                     <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <Profile
-                        handleAddClick={handleAddClick}
+                        defaultClothingItems={clothingItems}
                         onCardClick={handleCardClick}
-                        defaultClothingItems={defaultClothingItems}
+                        handleAddClick={handleAddClick}
                         handleEditClick={handleEditClick}
-                        handleUpdateUser={handleUpdateUser}
-                        // isLoggedIn={isLoggedIn}
-                        isLiked={isLiked}
-                        onCardLike={handleCardLike}
+                        handleCardLike={handleCardLike}
                         handleLogOut={handleLogOut}
                       />
                     </ProtectedRoute>
