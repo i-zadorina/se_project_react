@@ -9,7 +9,7 @@ const Login = ({
   onClose,
   activeModal,
 }) => {
-  const { values, handleChange, resetForm } = useForm({
+  const { values, handleChange } = useForm({
     email: "",
     password: "",
   });
@@ -18,7 +18,6 @@ const Login = ({
     e.preventDefault();
     handleLogin(values);
     onClose();
-    resetForm();
   };
 
   return (

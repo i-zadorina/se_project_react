@@ -31,16 +31,6 @@ function addItem({ name, imageUrl, weather }, token) {
   }).then(checkResponse);
 }
 
-function createCard({ name, imageUrl, weather }) {
-  return fetch(`${baseUrl}/items`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, imageUrl, weather }),
-  }).then(checkResponse);
-}
-
 function deleteCard(cardId) {
   const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${cardId}`, {
@@ -72,25 +62,11 @@ function removeCardLike(id, token) {
   }).then(checkResponse);
 }
 
-function updateUser({ name, avatar }) {
-  const token = localStorage.getItem("jwt");
-
-  return request(`${baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ name, avatar }),
-  });
-}
 export {
   checkResponse,
   getItems,
   addItem,
-  createCard,
   deleteCard,
   addCardLike,
   removeCardLike,
-  updateUser,
 };

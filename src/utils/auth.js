@@ -3,13 +3,13 @@ import { getToken } from "./token";
 
 const token = getToken();
 
-function signUp({ name, avatarURL, email, password }) {
+function signUp({ name, avatar, email, password }) {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, avatarURL, email, password }),
+    body: JSON.stringify({ name, avatar, email, password }),
   }).then(checkResponse);
 }
 

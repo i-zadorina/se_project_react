@@ -43,11 +43,11 @@ function Header({
             <Link to="/profile" className="header__link">
               <p className="header__username">{currentUser?.name}</p>
             </Link>
-            {currentUser.avatarURL ? (
-              <img className="header__avatar" src={currentUser.avatarURL} />
+            {currentUser.avatar ? (
+              <img className="header__avatar" src={currentUser.avatar} />
             ) : (
               <div className="header__avatar-placeholder">
-                {currentUser.name[0].toUpperCase()}
+                {currentUser.name[0]?.toUpperCase()}
               </div>
             )}
           </div>

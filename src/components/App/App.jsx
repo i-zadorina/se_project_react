@@ -19,11 +19,9 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import {
   getItems,
   addItem,
-  createCard,
   deleteCard,
   addCardLike,
   removeCardLike,
-  updateUser,
 } from "../../utils/api";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import ProtectedRoute from "../ProtectedRoute";
@@ -111,9 +109,9 @@ function App() {
   }, [activeModal]);
 
   // SignUp, Login
-  const handleRegistration = ({ name, avatarURL, email, password }) => {
+  const handleRegistration = ({ name, avatar, email, password }) => {
     auth
-      .signUp({ name, avatarURL, email, password })
+      .signUp({ name, avatar, email, password })
       .then(() => {
         handleLogin({ email, password });
         closeActiveModal();

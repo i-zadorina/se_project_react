@@ -75,7 +75,7 @@ const Register = ({
         <input
           className="modal__input"
           type="url"
-          id="signup-avatar"
+          id="avatar"
           name="avatar"
           placeholder="Avatar URL"
           required
