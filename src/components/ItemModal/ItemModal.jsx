@@ -3,9 +3,9 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "../ModalWithForm/ModalWithForm.css";
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, onClose, card, onDeleteConfirm }) {
+function ItemModal({ activeModal, onClose, selectedCard, onDeleteConfirm }) {
   const { currentUser: user } = useContext(CurrentUserContext) || {};
-  const isOwn = card.owner === user._id;
+  const isOwn = selectedCard.owner === user._id;
   const cardDeleteButtonClassName = `modal__delete-button ${
     isOwn ? "modal__delete-button_visible" : "modal__delete-button_hidden"
   }`;
@@ -13,21 +13,25 @@ function ItemModal({ activeModal, onClose, card, onDeleteConfirm }) {
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content_type_preview">
         <button
-          onClick={onClose}
           className="modal__close_type_white"
           type="button"
+          onClick={onClose}
         ></button>
-        <img src={card.imageUrl} alt={card.name} className="modal__image" />
+        <img
+          src={selectedCard.imageUrl}
+          alt={selectedCard.name}
+          className="modal__image"
+        />
         <div className={isOwn ? "modal__footer_own" : "modal__footer"}></div>
         <div className="modal__left-section">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
+          <h2 className="modal__caption">{selectedCard.name}</h2>
+          <p className="modal__weather">Weather: {selectedCard.weather}</p>
         </div>
         <div className="modal__right-section">
           <button
             className={cardDeleteButtonClassName}
-            onClick={(e) => onDeleteConfirm(card._id)}
             type="button"
+            onClick={(e) => onDeleteConfirm(selectedCard._id)}
           >
             Delete item
           </button>

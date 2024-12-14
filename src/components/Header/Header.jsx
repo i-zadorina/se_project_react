@@ -45,12 +45,12 @@ function Header({
               {currentUser.avatar ? (
                 <img
                   className="header__avatar"
-                  src={currentUser.avatar}
-                  alt="Avatar"
+                  src={currentUser?.avatar}
+                  // alt="Avatar"
                 />
               ) : (
                 <div className="header__avatar-placeholder">
-                  {currentUser.name.split("")[0]}
+                  {currentUser?.name[0].toUpperCase()}
                 </div>
               )}
             </Link>

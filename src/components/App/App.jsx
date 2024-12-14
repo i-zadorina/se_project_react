@@ -268,6 +268,7 @@ function App() {
                 handleLoginClick={handleLoginClick}
                 weatherLocation={weatherLocation}
                 weatherData={weatherData}
+                isLoggedIn={isLoggedIn}
               />
               <Routes>
                 <Route
@@ -320,7 +321,7 @@ function App() {
             )}
             {activeModal === "preview" && (
               <ItemModal
-                card={selectedCard}
+                selectedCard={selectedCard}
                 onClose={closeActiveModal}
                 onDeleteConfirm={onDeleteConfirm}
               />

@@ -3,11 +3,11 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
-  const isLiked = item.likes.some((id) => id === currentUser._id);
+  const isLiked = item.likes.some((id) => id === currentUser?._id);
 
-  const isOwn = item.owner === currentUserId;
+  const isOwn = item.owner === currentUser?._id;
 
   const cardLikeClassName = `card__like ${isOwn ? "" : "card__like_hidden"} ${
     isLiked ? "card__like_liked" : ""

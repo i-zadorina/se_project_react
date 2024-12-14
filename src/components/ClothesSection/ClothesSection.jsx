@@ -9,7 +9,7 @@ const ClothesSection = ({
   defaultClothingItems,
   onCardLike,
 }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const userItems = defaultClothingItems.filter(
     (item) => item.owner === currentUser._id
