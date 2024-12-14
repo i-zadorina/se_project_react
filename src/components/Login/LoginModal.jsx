@@ -9,12 +9,16 @@ const Login = ({
   onClose,
   activeModal,
 }) => {
-  const { values, handleChange } = useForm({ email: "", password: "" });
+  const { values, handleChange, resetForm } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(values);
     onClose();
+    resetForm();
   };
 
   return (

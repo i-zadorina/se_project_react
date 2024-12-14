@@ -1,6 +1,5 @@
 .profile {
   display: flex;
-  gap: 116px;
 }
 .profile__sidebar {
   display: flex;
@@ -10,5 +9,4 @@
 .profile__clothing-items {
   display: flex;
   flex-direction: column;
-  /* width: 100%; */
 }

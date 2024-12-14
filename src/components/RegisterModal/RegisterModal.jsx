@@ -73,14 +73,14 @@ const Register = ({
       <label htmlFor="signup-avatar" className="modal__input_type_avatar">
         Avatar URL*
         <input
-          type="url"
           className="modal__input"
+          type="url"
           id="signup-avatar"
+          name="avatar"
           placeholder="Avatar URL"
           required
           value={values.avatar}
           onChange={handleChange}
-          name="avatar"
         />
       </label>
       <button

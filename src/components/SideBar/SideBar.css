@@ -1,3 +1,10 @@
+.sidebar {
+  width: 385px;
+}
+.sidebar__userinfo {
+  display: flex;
+  align-items: baseline;
+}
 .sidebar__username {
   line-height: 1.24;
   margin: 0;
@@ -16,4 +23,24 @@
   text-align: left;
   cursor: pointer;
   display: flex;
+}
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  margin: 0 16px 0 0;
+  border-radius: 50%;
+}
+.sidebar__avatar-placeholder {
+  color: #fff;
+  background-color: #ccc;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+  align-content: center;
+  text-align: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 16px 16px 0;
+  border-radius: 50%;
 }

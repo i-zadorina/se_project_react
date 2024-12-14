@@ -63,10 +63,10 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
-    _id: "",
+    // _id: "",
     name: "",
     avatar: "",
-    email: "",
+    // email: "",
   });
 
   const navigate = useNavigate();
@@ -111,9 +111,9 @@ function App() {
   }, [activeModal]);
 
   // SignUp, Login
-  const handleRegistration = ({ name, avatar, email, password }) => {
+  const handleRegistration = ({ name, avatarURL, email, password }) => {
     auth
-      .signUp({ name, avatar, email, password })
+      .signUp({ name, avatarURL, email, password })
       .then(() => {
         handleLogin({ email, password });
         closeActiveModal();
@@ -256,7 +256,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>
-      <AppContext.Provider value={{ isLoggedIn, setCurrentUser }}>
+      <AppContext.Provider value={{ isLoggedIn }}>
         <div className="page">
           <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, handleToggleSwitchChange }}

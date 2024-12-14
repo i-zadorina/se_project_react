@@ -3,7 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
 
 const AddItemModal = ({ onAddItem, onClose, isOpen }) => {
-  const { values, handleChange, setValues } = useForm({
+  const { values, handleChange, setValues, resetForm } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
@@ -17,7 +17,7 @@ const AddItemModal = ({ onAddItem, onClose, isOpen }) => {
     e.preventDefault();
     onAddItem(values);
     onClose();
-    // resetForm();
+    resetForm();
   };
 
   return (

@@ -11,9 +11,9 @@ export function useForm(inputValues) {
     });
   };
 
-  // const resetForm = () => {
-  //   setValues(inputValues);
-  // };
+  const resetForm = () => {
+    setValues(inputValues);
+  };
 
-  return { values, handleChange, setValues };
+  return { values, handleChange, setValues, resetForm };
 }
