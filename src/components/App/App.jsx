@@ -199,7 +199,7 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = getToken();
     addItem(values, jwt)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
@@ -210,13 +210,12 @@ function App() {
       });
   };
 
-  const onDeleteItem = () => {
-    return deleteCard(selectedCard._id)
+  const onDeleteItem = (_id) => {
+    const jwt = getToken();
+    deleteCard(selectedCard._id, jwt)
       .then(() => {
-        setClothingItems(
-          clothingItems.filter((item) => {
-            return item._id !== selectedCard._id;
-          })
+        setClothingItems((clothingItems) =>
+          clothingItems.filter((item) => item._id !== selectedCard._id)
         );
         closeActiveModal();
       })
@@ -319,9 +318,10 @@ function App() {
             )}
             {activeModal === "preview" && (
               <ItemModal
-                selectedCard={selectedCard}
+                isOpen={activeModal === "preview"}
+                card={selectedCard}
                 onClose={closeActiveModal}
-                onDeleteConfirm={onDeleteConfirm}
+                onDeleteConfirm={handleDeleteCardClick}
               />
             )}
             {activeModal === "delete-confirmation" && (
