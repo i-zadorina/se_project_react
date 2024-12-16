@@ -8,13 +8,13 @@ const SideBar = ({ handleEditClick, handleLogOut }) => {
     <section className="sidebar">
       <div className="sidebar__userinfo">
         {currentUser.avatar ? (
-          <img className="sidebar__avatar" src={currentUser.avatar} />
+          <img className="sidebar__avatar" src={currentUser?.avatar} />
         ) : (
           <div className="sidebar__avatar-placeholder">
             {currentUser.name[0]?.toUpperCase()}
           </div>
         )}
-        <p className="sidebar__username">{currentUser.name}</p>
+        <p className="sidebar__username">{currentUser?.name}</p>
       </div>
       <div className="sidebar__buttons">
         <button

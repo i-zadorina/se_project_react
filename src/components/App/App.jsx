@@ -87,7 +87,7 @@ function App() {
     setActiveModal("signup");
   };
   const handleEditClick = () => {
-    setActiveModal("edit");
+    setActiveModal("edit-profile");
   };
   const closeActiveModal = () => {
     setActiveModal("");
@@ -147,8 +147,8 @@ function App() {
   const handleUpdateUser = (data) => {
     auth
       .updateUser(data)
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
+      .then((res) => {
+        setCurrentUser(res);
         closeActiveModal();
       })
       .catch(console.error);
@@ -210,12 +210,24 @@ function App() {
       });
   };
 
-  const onDeleteItem = (_id) => {
-    const jwt = getToken();
-    deleteCard(selectedCard._id, jwt)
+  // const onDeleteItem = (_id) => {
+  // const jwt = getToken();
+  // deleteCard(selectedCard._id, jwt)
+  // .then(() => {
+  // setClothingItems((clothingItems) =>
+  // clothingItems.filter((item) => item._id !== selectedCard._id)
+  // );
+  // closeActiveModal();
+  // })
+  // .catch(console.error);
+  // };
+  const onDeleteItem = () => {
+    deleteCard(selectedCard._id)
       .then(() => {
-        setClothingItems((clothingItems) =>
-          clothingItems.filter((item) => item._id !== selectedCard._id)
+        setClothingItems(
+          clothingItems.filter((item) => {
+            return item._id !== selectedCard._id;
+          })
         );
         closeActiveModal();
       })
@@ -349,7 +361,7 @@ function App() {
               handleRegisterClick={handleRegisterClick}
             />
           )}
-          {activeModal === "edit" && (
+          {activeModal === "edit-profile" && (
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}

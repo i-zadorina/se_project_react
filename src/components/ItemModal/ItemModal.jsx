@@ -6,7 +6,7 @@ import "./ItemModal.css";
 function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
   const { currentUser } = useContext(CurrentUserContext);
 
-  const isOwn = card.owner === currentUser?._id;
+  const isOwn = card?.owner === currentUser?._id;
 
   const cardDeleteButtonClassName = `modal__delete-button ${
     isOwn ? "modal__delete-button_visible" : "modal__delete-button_hidden"
@@ -32,7 +32,6 @@ function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
                 className={cardDeleteButtonClassName}
                 type="button"
                 onClick={onDeleteConfirm}
-                // onClick={(e) => onDeleteConfirm(card._id)}
               >
                 Delete item
               </button>

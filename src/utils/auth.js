@@ -23,17 +23,6 @@ function signIn({ email, password }) {
   }).then(checkResponse);
 }
 
-const editUserInfo = ({ name, avatarURL }, token) => {
-  return fetch(`${baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ name, avatarURL }),
-  }).then(checkResponse);
-};
-
 const getUserInfo = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
@@ -45,4 +34,15 @@ const getUserInfo = (token) => {
   }).then(checkResponse);
 };
 
-export { signUp, signIn, editUserInfo, getUserInfo };
+const updateUser = ({ name, avatarUrl: avatar }) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then(checkResponse);
+};
+
+export { signUp, signIn, updateUser, getUserInfo };

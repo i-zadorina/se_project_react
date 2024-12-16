@@ -1,16 +1,11 @@
-import './ConfirmDeleteModal.css';
+import "./ConfirmDeleteModal.css";
 
-const ConfirmDeleteModal = ({
-  onClose,
-  activeModal,
-  onDeleteItem,
-  card
-}) => {
+const ConfirmDeleteModal = ({ onClose, isOpen, onDeleteItem, card }) => {
   const buttonConfirmText = "Yes, delete item";
   const buttonCancel = "Cancel";
 
   return (
-    <div className={`modal ${activeModal === "delete-confirmation" && "modal_opened"}`}>
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="confirm-delete-modal">
         <button
           className="confirm-delete-modal__close-btn"
@@ -29,7 +24,7 @@ const ConfirmDeleteModal = ({
           <button
             className="confirm-delete-modal__delete"
             type="submit"
-            onClick={() => onDeleteItem(card)}
+            onClick={onDeleteItem}
           >
             {buttonConfirmText}
           </button>
@@ -45,6 +40,6 @@ const ConfirmDeleteModal = ({
       </div>
     </div>
   );
-}
+};
 
 export default ConfirmDeleteModal;
