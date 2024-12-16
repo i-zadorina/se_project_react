@@ -35,7 +35,6 @@ const ConfirmDeleteModal = ({ onClose, isOpen, onDeleteItem, card }) => {
           >
             {buttonCancel}
           </button>
-          <p className="confirm-delete-modal__item-id">{card._id}</p>
         </div>
       </div>
     </div>

@@ -171,29 +171,22 @@ function App() {
   }, [isLoggedIn]);
 
   //Cards, Items
-  const handleCardLike = ({ _id, isLiked }) => {
-    const id = _id;
+  const handleCardLike = ({ id, isLiked }) => {
     const jwt = getToken();
 
     !isLiked
       ? addCardLike(id, jwt)
           .then((updatedCard) => {
-            setClothingItems((defaultClothingItems) =>
-              defaultClothingItems?.map((item) =>
-                item._id === id ? updatedCard : item
-              )
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
             );
-            // setIsLiked(true);
           })
           .catch((err) => console.log(err))
       : removeCardLike(id, jwt)
           .then((updatedCard) => {
-            setClothingItems((defaultClothingItems) =>
-              defaultClothingItems?.map((item) =>
-                item._id === id ? updatedCard : item
-              )
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
             );
-            // setIsLiked(false);
           })
           .catch((err) => console.log(err));
   };
@@ -210,17 +203,6 @@ function App() {
       });
   };
 
-  // const onDeleteItem = (_id) => {
-  // const jwt = getToken();
-  // deleteCard(selectedCard._id, jwt)
-  // .then(() => {
-  // setClothingItems((clothingItems) =>
-  // clothingItems.filter((item) => item._id !== selectedCard._id)
-  // );
-  // closeActiveModal();
-  // })
-  // .catch(console.error);
-  // };
   const onDeleteItem = () => {
     deleteCard(selectedCard._id)
       .then(() => {
@@ -234,10 +216,10 @@ function App() {
       .catch(console.error);
   };
 
-  const onDeleteConfirm = (cardId) => {
-    setActiveModal("delete-confirmation");
-    setSelectedCard(cardId);
-  };
+  // const onDeleteConfirm = (cardId) => {
+  //   setActiveModal("delete-confirmation");
+  //   setSelectedCard(cardId);
+  // };
 
   useEffect(() => {
     getItems()
@@ -302,7 +284,7 @@ function App() {
                         onCardClick={handleCardClick}
                         handleAddClick={handleAddClick}
                         handleEditClick={handleEditClick}
-                        handleCardLike={handleCardLike}
+                        onCardLike={handleCardLike}
                         handleLogOut={handleLogOut}
                       />
                     </ProtectedRoute>
