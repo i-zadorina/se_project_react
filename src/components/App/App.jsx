@@ -148,7 +148,7 @@ function App() {
     auth
       .updateUser(data)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeActiveModal();
       })
       .catch(console.error);
@@ -195,7 +195,7 @@ function App() {
     const jwt = getToken();
     addItem(values, jwt)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems((clothingItems) => [newItem.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch((error) => {
@@ -215,11 +215,6 @@ function App() {
       })
       .catch(console.error);
   };
-
-  // const onDeleteConfirm = (cardId) => {
-  //   setActiveModal("delete-confirmation");
-  //   setSelectedCard(cardId);
-  // };
 
   useEffect(() => {
     getItems()

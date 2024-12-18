@@ -47,7 +47,7 @@ function Header({
               <img className="header__avatar" src={currentUser?.avatar} />
             ) : (
               <div className="header__avatar-placeholder">
-                {currentUser.name[0]?.toUpperCase()}
+                {currentUser?.name[0].toUpperCase()}
               </div>
             )}
           </div>
