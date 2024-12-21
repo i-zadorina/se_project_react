@@ -36,7 +36,7 @@ function deleteCard(cardId) {
   return fetch(`${baseUrl}/items/${cardId}`, {
     method: "DELETE",
     headers: {
-      "Content-Type": "application/json",
+      // "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);

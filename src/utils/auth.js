@@ -34,7 +34,7 @@ const getUserInfo = (token) => {
   }).then(checkResponse);
 };
 
-const updateUser = ({ name, avatarUrl: avatar }) => {
+const updateUser = ({ name, avatar }) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {

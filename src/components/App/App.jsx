@@ -128,11 +128,11 @@ function App() {
       .signIn({ email, password })
       .then((res) => {
         setToken(res.token);
-        setIsLoggedIn(true);
-        auth.getUserInfo(res.token).then((res) => {
-          setCurrentUser(res.data);
-        });
-        closeActiveModal();
+        return auth.getUserInfo(res.token)})
+        .then((user) => {
+          setCurrentUser(user.data);
+          setIsLoggedIn(true);
+          closeActiveModal();
         // const redirectPath = location.state?.from?.pathname || "/profile";
         // navigate(redirectPath);
       })
