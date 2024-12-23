@@ -1,3 +1,5 @@
+import { getToken } from "./token";
+
 const baseUrl = "http://localhost:3001";
 
 function checkResponse(res) {
@@ -26,10 +28,12 @@ const addItem = ({ name, imageUrl, weather }, token) => {
   });
 }
 
-const deleteCard = (cardId, token) => {
+const deleteCard = (cardId) => {
+  const token = getToken();
   return request(`items/${cardId}`, {
     method: "DELETE",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
