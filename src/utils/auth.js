@@ -1,48 +1,46 @@
-import { checkResponse, baseUrl } from "./api";
+import { request } from "./api";
 import { getToken } from "./token";
 
-const token = getToken();
-
-function signUp({ name, avatar, email, password }) {
-  return fetch(`${baseUrl}/signup`, {
+const signUp = ({ name, avatar, email, password }) => {
+  return request("signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then(checkResponse);
-}
+  });
+};
 
-function signIn({ email, password }) {
-  return fetch(`${baseUrl}/signin`, {
+const signIn = ({ email, password }) => {
+  return request("signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(checkResponse);
+  });
 }
 
 const getUserInfo = (token) => {
-  return fetch(`${baseUrl}/users/me`, {
+  return request("users/me", {
     method: "GET",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(checkResponse);
-};
+  });
+}
 
 const updateUser = ({ name, avatar }) => {
-  return fetch(`${baseUrl}/users/me`, {
+  const token = getToken();
+  return request("users/me", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
-  }).then(checkResponse);
-};
+  });
+}
 
 export { signUp, signIn, updateUser, getUserInfo };

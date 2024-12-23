@@ -7,7 +7,7 @@ const Register = ({
   handleRegistration,
   onClose,
   handleLoginClick,
-  activeModal,
+  activeModal, isLoading,
 }) => {
   const { values, handleChange } = useForm({
     email: "",
@@ -25,13 +25,13 @@ const Register = ({
   return (
     <ModalWithForm
       titleText="Sign Up"
-      buttonText="Sign Up"
+      buttonText={isLoading ? "Signing up..." : "Sign Up"}
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       activeModal={activeModal}
     >
-      <label htmlFor="signup-name" className="modal__input_type_name">
+      <label className="modal__input_type_name">
         Name*:
         <input
           type="text"
@@ -44,7 +44,7 @@ const Register = ({
           name="name"
         />
       </label>
-      <label htmlFor="signup-email" className="modal__input_type_email">
+      <label className="modal__input_type_email">
         Email*:
         <input
           type="email"
@@ -57,7 +57,7 @@ const Register = ({
           name="email"
         />
       </label>
-      <label htmlFor="signup-password" className="modal__input_type_password">
+      <label className="modal__input_type_password">
         Password*:
         <input
           type="password"
@@ -70,7 +70,7 @@ const Register = ({
           name="password"
         />
       </label>
-      <label htmlFor="signup-avatar" className="modal__input_type_avatar">
+      <label className="modal__input_type_avatar">
         Avatar URL*
         <input
           className="modal__input"

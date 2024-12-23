@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:3001";
+const baseUrl = "http://localhost:3001";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -7,62 +7,54 @@ function checkResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-function getItems() {
-  return fetch(`${baseUrl}/items`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(checkResponse);
-}
+const request = (url, options) => {
+  return fetch(`${baseUrl}/${url}`, options).then(checkResponse);
+};
 
-function addItem({ name, imageUrl, weather }, token) {
-  return fetch(`${baseUrl}/items`, {
+const getItems = () => {
+  return request(`items`);
+};
+
+const addItem = ({ name, imageUrl, weather }, token) => {
+  return request(`items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      name: name,
-      imageUrl: imageUrl,
-      weather: weather,
-    }),
-  }).then(checkResponse);
+    body: JSON.stringify({ name, imageUrl, weather }),
+  });
 }
 
-function deleteCard(cardId) {
-  const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/${cardId}`, {
+const deleteCard = (cardId, token) => {
+  return request(`items/${cardId}`, {
     method: "DELETE",
     headers: {
-      // "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
-  }).then(checkResponse);
+  });
 }
 
-function addCardLike(id, token) {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+const addCardLike = (cardId, token) => {
+  return request(`items/${cardId}/likes`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(checkResponse);
+  });
 }
 
-function removeCardLike(id, token) {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+const removeCardLike = (cardId, token) => {
+  return request(`items/${cardId}/likes`, {
     method: "DELETE",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(checkResponse);
+  });
 }
 
 export {
+  request,
   checkResponse,
   getItems,
   addItem,

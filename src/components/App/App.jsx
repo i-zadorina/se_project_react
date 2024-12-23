@@ -43,28 +43,26 @@ function App() {
   const [weatherLocation, setLocation] = useState("");
   const [temp, setTemp] = useState(0);
 
-  useEffect(() => {
-    getWeather()
-      .then((data) => {
-        const weather = {
-          temperature: {
-            F: Math.round(data.main.temp),
-            C: Math.round(((data.main.temp - 32) * 5) / 9),
-          },
-        };
-      })
-      .catch(console.error);
-  }, []);
-
+  // useEffect(() => {
+  //   getWeather()
+  //     .then((data) => {
+  //       const weather = {
+  //         temperature: {
+  //           F: Math.round(data.main.temp),
+  //           C: Math.round(((data.main.temp - 32) * 5) / 9),
+  //         },
+  //       };
+  //     })
+  //     .catch(console.error);
+  // }, []);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
-    // _id: "",
     name: "",
     avatar: "",
-    // email: "",
   });
 
   const navigate = useNavigate();
@@ -92,7 +90,7 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  // handle Escape Close
+  // handle Escape&Overlay Close
   useEffect(() => {
     if (!activeModal) return;
 
@@ -101,12 +99,21 @@ function App() {
         closeActiveModal();
       }
     };
-    document.addEventListener("keydown", handleEscClose);
 
+    document.addEventListener("keydown", handleEscClose);
+    
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
+  
+  const handleOverlay = (e) => {
+    if (e.target === e.currentTarget) {
+      closeActiveModal();
+    }
+  };
+  document.addEventListener("click", handleOverlay);
+  document.removeEventListener("click", handleOverlay);
 
   // SignUp, Login
   const handleRegistration = ({ name, avatar, email, password }) => {
@@ -303,6 +310,7 @@ function App() {
                 isOpen={activeModal === "add-garment"}
                 onClose={closeActiveModal}
                 onAddItem={onAddItem}
+                isLoading={isLoading}
               />
             )}
             {activeModal === "preview" && (
@@ -328,12 +336,14 @@ function App() {
               onClose={closeActiveModal}
               handleRegistration={handleRegistration}
               handleLoginClick={handleLoginClick}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "login" && (
             <Login
               isOpen={activeModal === "login"}
               onClose={closeActiveModal}
+              isLoading={isLoading}
               handleLogin={handleLogin}
               handleRegisterClick={handleRegisterClick}
             />
@@ -343,6 +353,7 @@ function App() {
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
               updateUser={handleUpdateUser}
+              isLoading={isLoading}
             />
           )}
         </div>

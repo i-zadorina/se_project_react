@@ -8,6 +8,7 @@ const Login = ({
   handleRegisterClick,
   onClose,
   activeModal,
+  isLoading,
 }) => {
   const { values, handleChange } = useForm({
     email: "",
@@ -23,13 +24,13 @@ const Login = ({
   return (
     <ModalWithForm
       titleText="Login"
-      buttonText="Log In"
+      buttonText={isLoading ? 'Saving...' : 'Log In'}
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       activeModal={activeModal}
     >
-      <label htmlFor="email" className="modal__input_type_email">
+      <label className="modal__input_type_email">
         Email
         <input
           type="email"
@@ -42,7 +43,7 @@ const Login = ({
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="password" className="modal__input_type_password">
+      <label className="modal__input_type_password">
         Password
         <input
           type="password"
