@@ -42,19 +42,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [weatherLocation, setLocation] = useState("");
   const [temp, setTemp] = useState(0);
-
-  // useEffect(() => {
-  //   getWeather()
-  //     .then((data) => {
-  //       const weather = {
-  //         temperature: {
-  //           F: Math.round(data.main.temp),
-  //           C: Math.round(((data.main.temp - 32) * 5) / 9),
-  //         },
-  //       };
-  //     })
-  //     .catch(console.error);
-  // }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -101,12 +88,12 @@ function App() {
     };
 
     document.addEventListener("keydown", handleEscClose);
-    
+
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
-  
+
   const handleOverlay = (e) => {
     if (e.target === e.currentTarget) {
       closeActiveModal();
@@ -135,13 +122,12 @@ function App() {
       .signIn({ email, password })
       .then((res) => {
         setToken(res.token);
-        return auth.getUserInfo(res.token)})
-        .then((user) => {
-          setCurrentUser(user.data);
-          setIsLoggedIn(true);
-          closeActiveModal();
-        // const redirectPath = location.state?.from?.pathname || "/profile";
-        // navigate(redirectPath);
+        return auth.getUserInfo(res.token);
+      })
+      .then((user) => {
+        setCurrentUser(user.data);
+        setIsLoggedIn(true);
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -171,8 +157,6 @@ function App() {
       .then((res) => {
         setCurrentUser(res.data);
         setIsLoggedIn(true);
-        // const redirectPath = location.state?.from?.pathname || "/";
-        // navigate(redirectPath);
       })
       .catch(console.error);
   }, [isLoggedIn]);

@@ -16,3 +16,11 @@ This app is using React and Vite, as also API calls, to display the weather and 
 - [Frontend](https://i-zadorina.github.io/se_project_react/)
 
 - [Backend](https://github.com/i-zadorina/se_project_express)
+
+## Plans to improve the project
+
+Connect user's location API
+
+## Screenshot of project:
+
+![alt text](image.png)

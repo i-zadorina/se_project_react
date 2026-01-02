@@ -21,14 +21,6 @@ function WeatherCard({ weatherData, weatherTemp }) {
     weatherOption = filteredOptions[0];
   }
 
-  // function getTemp() {
-  //   if (currentTemperatureUnit === "F") {
-  //     return `${weatherData.temp.F}°F`;
-  //   } else {
-  //     return `${weatherData.temp.C}°C`;
-  //   }
-  // }
-
   return (
     <section className="weather-card">
       <p className="weather-card__temp">

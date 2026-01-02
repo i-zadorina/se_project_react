@@ -48,7 +48,6 @@ function Header({
             ) : (
               <div className="header__avatar-placeholder">
                 {currentUser.name ? currentUser.name[0].toUpperCase() : ""}
-                {/* {currentUser?.name[0].toUpperCase()} */}
               </div>
             )}
           </div>

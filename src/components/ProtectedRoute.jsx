@@ -6,13 +6,3 @@ export default function ProtectedRoute({ isLoggedIn, children }) {
   }
   return children;
 }
-//   const location = useLocation();
-//   const from = location.state?.from || "/";
-
-//   if (isLoggedIn) {
-//     return <Navigate to={from} />;
-//   } else if (!isLoggedIn) {
-//     return <Navigate to="/login" state={{ from: location }} />;
-//   }
-//   return children;
-// }
