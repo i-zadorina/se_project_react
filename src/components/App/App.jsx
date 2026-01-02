@@ -22,6 +22,7 @@ import {
   removeCardLike,
 } from '../../utils/api';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
+import ConfirmLogOutModal from '../ConfirmLogOutModal/ConfirmLogOutModal.jsx';
 import ProtectedRoute from '../ProtectedRoute';
 import * as auth from '../../utils/auth';
 import Register from '../RegisterModal/RegisterModal';
