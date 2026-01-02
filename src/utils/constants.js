@@ -1,10 +1,6 @@
-// Tel Aviv:
+// Bnei Brak:
 export const latitude = 32.109333;
 export const longitude = 34.855499;
-// England:
-// latitude: 51.853294,
-// longitude: -4.305573,
-
 export const APIkey = "a054fb4cb3f3b71d4a96d2ff376d1d77";
 
 export const defaultWeatherOptions = {

@@ -214,16 +214,7 @@ function App() {
     if (currentTemperatureUnit === 'C') setCurrentTemperatureUnit('F');
     if (currentTemperatureUnit === 'F') setCurrentTemperatureUnit('C');
   };
-  // useEffect(() => {
-  //   getWeather()
-  //     .then((data) => {
-  //       const filteredData = filterWeatherData(data);
-  //       setWeatherData(filteredData);
-  //       const temperature = filteredData.temp;
-  //       setTemp(temperature);
-  //     })
-  //     .catch(console.error);
-  // }, []);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -234,7 +225,7 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
         setTemp(filteredData.temp);
-        setLocation(filteredData.city); // если хочешь в Header показывать город
+        setLocation(filteredData.city);
       } catch (e) {
         console.error(e);
       }
