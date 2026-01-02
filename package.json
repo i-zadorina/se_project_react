@@ -1,5 +1,5 @@
 {
-  "homepage": "https://wtwr.teachmetofish.net",
+  "homepage": "https://wtwr.net",
   "name": "se_project_react",
   "private": true,
   "version": "0.0.0",
@@ -8,8 +8,7 @@
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "deploy": "npm run build && scp -r ./dist/* i_s_zadorina@wtwr.teachmetofish.net:/home/i_s_zadorina/frontend"
+    "preview": "vite preview"
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.1",

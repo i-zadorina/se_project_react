@@ -1,5 +1,7 @@
 # React + Vite project : WTWR (What to Wear?)
 
+- [Page](https://wtwr.net/)
+
 ## About the project
 
 This code is the front-end of the WTWR app. The app shows a weather card depending on the temperature of the location of the user and shows compatible clothes to wear for the weather. It communicates with WeatherAPI and a customized database via a local server. Due to budget issues, the WTWR app is not hosted on Google CLoud anymore. You can clone this and the backend repos, install npm packages and run it locally ! Repo of the local server:
@@ -11,6 +13,6 @@ This app is using React and Vite, as also API calls, to display the weather and 
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
 
-- [Page](https://i-zadorina.github.io/se_project_react/)
+- [Frontend](https://i-zadorina.github.io/se_project_react/)
 
 - [Backend](https://github.com/i-zadorina/se_project_express)
