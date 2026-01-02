@@ -1,123 +1,116 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import './App.css';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import ItemModal from '../ItemModal/ItemModal';
+import Profile from '../Profile/Profile';
+import EditProfileModal from '../EditProfileModal/EditProfileModal.jsx';
 import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
-import "./App.css";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
-import ItemModal from "../ItemModal/ItemModal";
-import Profile from "../Profile/Profile";
-import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import AddItemModal from "../AddItemModal/AddItemModal";
+  latitude as DEFAULT_LAT,
+  longitude as DEFAULT_LON,
+} from '../../utils/constants';
+import { getWeather, filterWeatherData } from '../../utils/weatherApi';
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
+import AddItemModal from '../AddItemModal/AddItemModal';
 import {
   getItems,
   addItem,
   deleteCard,
   addCardLike,
   removeCardLike,
-} from "../../utils/api";
-import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
-import ProtectedRoute from "../ProtectedRoute";
-import * as auth from "../../utils/auth";
-import Register from "../RegisterModal/RegisterModal";
-import Login from "../Login/LoginModal";
-import { setToken, getToken, removeToken } from "../../utils/token";
-import AppContext from "../../contexts/AppContext";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+} from '../../utils/api';
+import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
+import ProtectedRoute from '../ProtectedRoute';
+import * as auth from '../../utils/auth';
+import Register from '../RegisterModal/RegisterModal';
+import Login from '../Login/LoginModal';
+import { setToken, getToken, removeToken } from '../../utils/token';
+import AppContext from '../../contexts/AppContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   //useState hooks
   const [weatherData, setWeatherData] = useState({
-    type: "",
+    type: '',
     temp: { F: 999 },
-    city: "",
+    city: '',
   });
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [weatherLocation, setLocation] = useState("");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
+  const [weatherLocation, setLocation] = useState('');
   const [temp, setTemp] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState('');
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
-    name: "",
-    avatar: "",
+    name: '',
+    avatar: '',
   });
-
+  const [coords, setCoords] = useState({ lat: DEFAULT_LAT, lon: DEFAULT_LON });
   const navigate = useNavigate();
 
   //Clicks
   const handleCardClick = (card) => {
-    setActiveModal("preview");
+    setActiveModal('preview');
     setSelectedCard(card);
   };
   const handleAddClick = () => {
-    setActiveModal("add-garment");
+    setActiveModal('add-garment');
   };
   const handleDeleteCardClick = () => {
-    setActiveModal("delete-confirmation");
+    setActiveModal('delete-confirmation');
   };
   const handleLoginClick = () => {
-    setActiveModal("login");
+    setActiveModal('login');
   };
   const handleRegisterClick = () => {
-    setActiveModal("signup");
+    setActiveModal('signup');
   };
   const handleEditClick = () => {
-    setActiveModal("edit-profile");
+    setActiveModal('edit-profile');
   };
   const closeActiveModal = () => {
-    setActiveModal("");
+    setActiveModal('');
+    setIsLoading(false);
   };
   // handle Escape&Overlay Close
   useEffect(() => {
     if (!activeModal) return;
 
     const handleEscClose = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         closeActiveModal();
       }
     };
 
-    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener('keydown', handleEscClose);
 
     return () => {
-      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener('keydown', handleEscClose);
     };
   }, [activeModal]);
 
-  const handleOverlay = (e) => {
-    if (e.target === e.currentTarget) {
-      closeActiveModal();
-    }
-  };
-  document.addEventListener("click", handleOverlay);
-  document.removeEventListener("click", handleOverlay);
-
   // SignUp, Login
   const handleRegistration = ({ name, avatar, email, password }) => {
+    setIsLoading(true);
     auth
       .signUp({ name, avatar, email, password })
       .then(() => {
         handleLogin({ email, password });
-        closeActiveModal();
-        navigate("/profile");
+        navigate('/profile');
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleLogin = ({ email, password }) => {
-    if (!email || !password) {
-      return;
-    }
+    if (!email || !password) return;
+
+    setIsLoading(true);
+
     auth
       .signIn({ email, password })
       .then((res) => {
@@ -129,7 +122,8 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleLogOut = () => {
@@ -169,14 +163,14 @@ function App() {
       ? addCardLike(id, jwt)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard : item)),
             );
           })
           .catch((err) => console.log(err))
       : removeCardLike(id, jwt)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard : item)),
             );
           })
           .catch((err) => console.log(err));
@@ -190,7 +184,7 @@ function App() {
         closeActiveModal();
       })
       .catch((error) => {
-        console.error("Error adding item:", error);
+        console.error('Error adding item:', error);
       });
   };
 
@@ -200,7 +194,7 @@ function App() {
         setClothingItems(
           clothingItems.filter((item) => {
             return item._id !== selectedCard._id;
-          })
+          }),
         );
         closeActiveModal();
       })
@@ -217,18 +211,69 @@ function App() {
 
   // Weather
   const handleToggleSwitchChange = () => {
-    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
-    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+    if (currentTemperatureUnit === 'C') setCurrentTemperatureUnit('F');
+    if (currentTemperatureUnit === 'F') setCurrentTemperatureUnit('C');
   };
+  // useEffect(() => {
+  //   getWeather()
+  //     .then((data) => {
+  //       const filteredData = filterWeatherData(data);
+  //       setWeatherData(filteredData);
+  //       const temperature = filteredData.temp;
+  //       setTemp(temperature);
+  //     })
+  //     .catch(console.error);
+  // }, []);
   useEffect(() => {
-    getWeather()
-      .then((data) => {
+    let cancelled = false;
+
+    const loadWeather = async (lat, lon) => {
+      try {
+        const data = await getWeather(lat, lon);
+        if (cancelled) return;
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
-        const temperature = filteredData.temp;
-        setTemp(temperature);
-      })
-      .catch(console.error);
+        setTemp(filteredData.temp);
+        setLocation(filteredData.city); // если хочешь в Header показывать город
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    const fallback = () => {
+      setGeoError('Geolocation unavailable or denied; using default location.');
+      loadWeather(DEFAULT_LAT, DEFAULT_LON);
+    };
+
+    if (!('geolocation' in navigator)) {
+      fallback();
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        if (cancelled) return;
+        setCoords({ lat, lon });
+        loadWeather(lat, lon);
+      },
+      (err) => {
+        console.warn('Geolocation error:', err);
+        fallback();
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 8000,
+        maximumAge: 5 * 60 * 1000,
+      },
+    );
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -289,52 +334,52 @@ function App() {
               </Routes>
               <Footer />
             </div>
-            {activeModal === "add-garment" && (
+            {activeModal === 'add-garment' && (
               <AddItemModal
-                isOpen={activeModal === "add-garment"}
+                isOpen={activeModal === 'add-garment'}
                 onClose={closeActiveModal}
                 onAddItem={onAddItem}
                 isLoading={isLoading}
               />
             )}
-            {activeModal === "preview" && (
+            {activeModal === 'preview' && (
               <ItemModal
-                isOpen={activeModal === "preview"}
+                isOpen={activeModal === 'preview'}
                 card={selectedCard}
                 onClose={closeActiveModal}
                 onDeleteConfirm={handleDeleteCardClick}
               />
             )}
-            {activeModal === "delete-confirmation" && (
+            {activeModal === 'delete-confirmation' && (
               <ConfirmDeleteModal
-                isOpen={activeModal === "delete-confirmation"}
+                isOpen={activeModal === 'delete-confirmation'}
                 card={selectedCard}
                 onClose={closeActiveModal}
                 onDeleteItem={onDeleteItem}
               />
             )}
           </CurrentTemperatureUnitContext.Provider>
-          {activeModal === "signup" && (
+          {activeModal === 'signup' && (
             <Register
-              isOpen={activeModal === "signup"}
+              isOpen={activeModal === 'signup'}
               onClose={closeActiveModal}
               handleRegistration={handleRegistration}
               handleLoginClick={handleLoginClick}
               isLoading={isLoading}
             />
           )}
-          {activeModal === "login" && (
+          {activeModal === 'login' && (
             <Login
-              isOpen={activeModal === "login"}
+              isOpen={activeModal === 'login'}
               onClose={closeActiveModal}
               isLoading={isLoading}
               handleLogin={handleLogin}
               handleRegisterClick={handleRegisterClick}
             />
           )}
-          {activeModal === "edit-profile" && (
+          {activeModal === 'edit-profile' && (
             <EditProfileModal
-              isOpen={activeModal === "edit-profile"}
+              isOpen={activeModal === 'edit-profile'}
               onClose={closeActiveModal}
               updateUser={handleUpdateUser}
               isLoading={isLoading}

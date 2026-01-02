@@ -1,6 +1,6 @@
-import { useForm } from "../../hooks/UseForm";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import "./LoginModal.css";
+import { useForm } from '../../hooks/UseForm';
+import ModalWithForm from '../ModalWithForm/ModalWithForm';
+import './LoginModal.css';
 
 const Login = ({
   isOpen,
@@ -11,22 +11,22 @@ const Login = ({
   isLoading,
 }) => {
   const { values, handleChange } = useForm({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(values);
-    onClose();
   };
 
   return (
     <ModalWithForm
       titleText="Login"
-      buttonText={isLoading ? 'Saving...' : 'Log In'}
+      buttonText={isLoading ? 'Logging in...' : 'Log In'}
       onClose={onClose}
       isOpen={isOpen}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
       activeModal={activeModal}
     >

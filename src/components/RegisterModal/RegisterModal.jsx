@@ -1,33 +1,34 @@
-import { useForm } from "../../hooks/UseForm";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import "./RegisterModal.css";
+import { useForm } from '../../hooks/UseForm';
+import ModalWithForm from '../ModalWithForm/ModalWithForm';
+import './RegisterModal.css';
 
 const Register = ({
   isOpen,
   handleRegistration,
   onClose,
   handleLoginClick,
-  activeModal, isLoading,
+  activeModal,
+  isLoading,
 }) => {
   const { values, handleChange } = useForm({
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
+    email: '',
+    password: '',
+    name: '',
+    avatar: '',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration(values);
-    onClose();
   };
 
   return (
     <ModalWithForm
       titleText="Sign Up"
-      buttonText={isLoading ? "Signing up..." : "Sign Up"}
+      buttonText={isLoading ? 'Signing up...' : 'Sign Up'}
       onClose={onClose}
       isOpen={isOpen}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
       activeModal={activeModal}
     >

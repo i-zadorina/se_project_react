@@ -1,11 +1,17 @@
 import { checkResponse } from "./api";
 import { latitude, longitude, APIkey } from "./constants";
 
-export const getWeather = () => {
+// export const getWeather = () => {
+//   return fetch(
+//     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
+//   ).then(checkResponse);
+// };
+export const getWeather = (lat, lon) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${APIkey}`
   ).then(checkResponse);
 };
+
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
