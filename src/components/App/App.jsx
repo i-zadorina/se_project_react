@@ -72,6 +72,9 @@ function App() {
   const handleEditClick = () => {
     setActiveModal('edit-profile');
   };
+  const handleLogOutClick = () => {
+    setActiveModal('logout-confirmation');
+  };
   const closeActiveModal = () => {
     setActiveModal('');
     setIsLoading(false);
@@ -129,6 +132,7 @@ function App() {
   const handleLogOut = () => {
     removeToken();
     setIsLoggedIn(false);
+    closeActiveModal();
   };
 
   const handleUpdateUser = (data) => {
@@ -307,7 +311,7 @@ function App() {
                         handleAddClick={handleAddClick}
                         handleEditClick={handleEditClick}
                         onCardLike={handleCardLike}
-                        handleLogOut={handleLogOut}
+                        handleLogOutClick={handleLogOutClick}
                       />
                     </ProtectedRoute>
                   }
@@ -374,6 +378,13 @@ function App() {
               onClose={closeActiveModal}
               updateUser={handleUpdateUser}
               isLoading={isLoading}
+            />
+          )}
+          {activeModal === 'logout-confirmation' && (
+            <ConfirmLogOutModal
+              isOpen={activeModal === 'logout-confirmation'}
+              onClose={closeActiveModal}
+              handleLogOut={handleLogOut}
             />
           )}
         </div>

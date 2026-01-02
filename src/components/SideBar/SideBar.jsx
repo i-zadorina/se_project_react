@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import "./SideBar.css";
+import React, { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import './SideBar.css';
 
-const SideBar = ({ handleEditClick, handleLogOut }) => {
+const SideBar = ({ handleEditClick, handleLogOutClick }) => {
   const { currentUser } = useContext(CurrentUserContext);
   return (
     <section className="sidebar">
@@ -27,7 +27,7 @@ const SideBar = ({ handleEditClick, handleLogOut }) => {
         <button
           className="sidebar__button"
           type="button"
-          onClick={handleLogOut}
+          onClick={handleLogOutClick}
         >
           Log out
         </button>

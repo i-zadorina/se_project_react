@@ -1,12 +1,12 @@
-import SideBar from "../SideBar/SideBar";
-import ClothesSection from "../ClothesSection/ClothesSection";
-import "./Profile.css";
+import SideBar from '../SideBar/SideBar';
+import ClothesSection from '../ClothesSection/ClothesSection';
+import './Profile.css';
 
 const Profile = ({
   handleAddClick,
   onCardClick,
   defaultClothingItems,
-  handleLogOut,
+  handleLogOutClick,
   handleEditClick,
   onCardLike,
 }) => {
@@ -14,7 +14,7 @@ const Profile = ({
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar
-          handleLogOut={handleLogOut}
+          handleLogOutClick={handleLogOutClick}
           handleEditClick={handleEditClick}
         />
       </section>
