@@ -1,11 +1,16 @@
-import "./ConfirmDeleteModal.css";
+import './ConfirmDeleteModal.css';
 
 const ConfirmDeleteModal = ({ onClose, isOpen, onDeleteItem, card }) => {
-  const buttonConfirmText = "Yes, delete item";
-  const buttonCancel = "Cancel";
+  const buttonConfirmText = 'Yes, delete item';
+  const buttonCancel = 'Cancel';
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div
+      className={`modal ${isOpen ? 'modal_opened' : ''}`}
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div className="confirm-delete-modal">
         <button
           className="confirm-delete-modal__close-btn"

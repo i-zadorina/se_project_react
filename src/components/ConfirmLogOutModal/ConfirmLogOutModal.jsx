@@ -1,11 +1,16 @@
-import "./ConfirmLogOutModal.css";
+import './ConfirmLogOutModal.css';
 
 const ConfirmLogOutModal = ({ onClose, isOpen, handleLogOut }) => {
-  const buttonConfirmText = "Yes, log out";
-  const buttonCancel = "Cancel";
+  const buttonConfirmText = 'Yes, log out';
+  const buttonCancel = 'Cancel';
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div
+      className={`modal ${isOpen ? 'modal_opened' : ''}`}
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div className="confirm-logout-modal">
         <button
           className="confirm-logout-modal__close-btn"

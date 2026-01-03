@@ -1,6 +1,6 @@
 .page {
   background-color: #f3f3f3;
-  height: 100vh;
+  height: 100%;
 }
 .page__content {
   max-width: 1360px;
@@ -19,5 +19,6 @@
   .page__content {
     font-size: 18px;
     padding: 0 24px;
+    overflow: auto;
   }
 }

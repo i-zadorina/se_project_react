@@ -25,3 +25,9 @@
   padding: 0;
   margin: 0;
 }
+@media (max-width: 640px) {
+  .clothes-section__title,
+  .clothes-section__add-btn {
+    margin: 20px 0 0;
+  }
+}
