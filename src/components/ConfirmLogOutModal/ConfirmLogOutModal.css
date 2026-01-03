@@ -71,4 +71,7 @@
   .confirm-logout-modal {
     padding: 0 24px 24px;
   }
+  .confirm-logout-modal__container {
+    margin-top: 32px;
+  }
 }

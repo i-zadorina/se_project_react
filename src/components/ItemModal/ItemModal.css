@@ -83,4 +83,7 @@
     height: auto;
     aspect-ratio: 1 / 1;
   }
+  .modal__caption {
+    font-size: 18px;
+  }
 }

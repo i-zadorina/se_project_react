@@ -54,4 +54,10 @@
     width: auto;
     flex-direction: row;
   }
+  .sidebar__button {
+    font-size: 16px;
+  }
+  .sidebar__username {
+    width: auto;
+  }
 }
