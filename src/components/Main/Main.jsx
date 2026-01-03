@@ -1,8 +1,8 @@
-import WeatherCard from "../WeatherCard/WeatherCard";
-import ItemCard from "../ItemCard/ItemCard";
-import "./Main.css";
-import { React, useContext } from "react";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import WeatherCard from '../WeatherCard/WeatherCard';
+import ItemCard from '../ItemCard/ItemCard';
+import './Main.css';
+import { React, useContext } from 'react';
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
 
 function Main({
   weatherData,
@@ -15,7 +15,7 @@ function Main({
   const temp = weatherTemp?.[currentTemperatureUnit];
 
   return (
-    <main>
+    <main className="main">
       <WeatherCard weatherData={weatherData} weatherTemp={temp} />
       <section className="cards">
         <p className="cards__text">
