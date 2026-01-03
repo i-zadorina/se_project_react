@@ -1,14 +1,20 @@
-import { useEffect, useContext } from "react";
-import { useForm } from "../../hooks/UseForm";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useEffect, useContext } from 'react';
+import { useForm } from '../../hooks/UseForm';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ModalWithForm from '../ModalWithForm/ModalWithForm';
 
-function EditProfileModal({ isOpen, onClose, updateUser, activeModal, isLoading }) {
+function EditProfileModal({
+  isOpen,
+  onClose,
+  updateUser,
+  activeModal,
+  isLoading,
+}) {
   const { currentUser } = useContext(CurrentUserContext);
 
   const { values, handleChange, setValues } = useForm({
-    name: currentUser.name || "",
-    avatar: currentUser.avatar || "",
+    name: currentUser.name || '',
+    avatar: currentUser.avatar || '',
   });
 
   const handleSubmit = (e) => {
@@ -19,23 +25,24 @@ function EditProfileModal({ isOpen, onClose, updateUser, activeModal, isLoading 
 
   useEffect(() => {
     setValues({
-      name: currentUser.name || "",
-      avatar: currentUser.avatar || "",
+      name: currentUser.name || '',
+      avatar: currentUser.avatar || '',
     });
   }, [currentUser, setValues]);
 
   return (
     <ModalWithForm
       title="Change Profile Data"
-      name={"edit-profile"}
+      name={'edit-profile'}
       buttonText={isLoading ? 'Saving...' : 'Save changes'}
       isOpen={isOpen}
       onClose={onClose}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
       activeModal={activeModal}
     >
       <label className="modal__label">
-        Name *{" "}
+        Name *{' '}
         <input
           className="modal__input"
           id="edit-name"
@@ -51,7 +58,7 @@ function EditProfileModal({ isOpen, onClose, updateUser, activeModal, isLoading 
       </label>
 
       <label className="modal__label">
-        Avatar *{" "}
+        Avatar *{' '}
         <input
           type="url"
           className="modal__input"

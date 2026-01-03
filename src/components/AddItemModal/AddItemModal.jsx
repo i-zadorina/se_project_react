@@ -1,13 +1,13 @@
-import { useForm } from "../../hooks/UseForm";
-import { useEffect } from "react";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import "./AddItemModal.css";
+import { useForm } from '../../hooks/UseForm';
+import { useEffect } from 'react';
+import ModalWithForm from '../ModalWithForm/ModalWithForm';
+import './AddItemModal.css';
 
 const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
   const { values, handleChange, setValues, resetForm } = useForm({
-    name: "",
-    imageUrl: "",
-    weather: "",
+    name: '',
+    imageUrl: '',
+    weather: '',
   });
 
   const handleWeatherType = (e) => {
@@ -29,11 +29,12 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
       buttonText={isLoading ? 'Saving...' : 'Add garment'}
       onClose={onClose}
       isOpen={isOpen}
-      name={"add-garment"}
+      isLoading={isLoading}
+      name={'add-garment'}
       onSubmit={handleSubmit}
     >
       <label className="modal__input_type_name">
-        Name{" "}
+        Name{' '}
         <input
           type="text"
           className="modal__input"
@@ -45,7 +46,7 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
         />
       </label>
       <label className="modal__input_type_image">
-        Image{" "}
+        Image{' '}
         <input
           type="url"
           className="modal__input"
@@ -65,9 +66,9 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
             name="weather"
             className="modal__radio-input"
             value="hot"
-            checked={values.weather === "hot"}
+            checked={values.weather === 'hot'}
             onChange={handleWeatherType}
-          />{" "}
+          />{' '}
           Hot
         </label>
         <label className="modal__label modal__label_type_radio">
@@ -77,9 +78,9 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
             name="weather"
             className="modal__radio-input"
             value="warm"
-            checked={values.weather === "warm"}
+            checked={values.weather === 'warm'}
             onChange={handleWeatherType}
-          />{" "}
+          />{' '}
           Warm
         </label>
         <label className="modal__label modal__label_type_radio">
@@ -89,9 +90,9 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
             name="weather"
             className="modal__radio-input"
             value="cold"
-            checked={values.weather === "cold"}
+            checked={values.weather === 'cold'}
             onChange={handleWeatherType}
-          />{" "}
+          />{' '}
           Cold
         </label>
       </fieldset>
