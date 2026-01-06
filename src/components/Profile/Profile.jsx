@@ -5,7 +5,7 @@ import './Profile.css';
 const Profile = ({
   handleAddClick,
   onCardClick,
-  defaultClothingItems,
+  clothingItems,
   handleLogOutClick,
   handleEditClick,
   onCardLike,
@@ -22,7 +22,7 @@ const Profile = ({
         <ClothesSection
           handleAddClick={handleAddClick}
           onCardClick={onCardClick}
-          defaultClothingItems={defaultClothingItems}
+          clothingItems={clothingItems}
           onCardLike={onCardLike}
         />
       </section>

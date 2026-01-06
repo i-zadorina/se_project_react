@@ -1,16 +1,16 @@
 import { useContext } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import AppContext from '../../contexts/AppContext';
 import '../ModalWithForm/ModalWithForm.css';
 import './ItemModal.css';
 
 function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { isLoggedIn } = useContext(AppContext);
 
-  const isOwn = card?.owner === currentUser?._id;
+  if (!card) return null;
 
-  const cardDeleteButtonClassName = `modal__delete-button ${
-    isOwn ? 'modal__delete-button_visible' : 'modal__delete-button_hidden'
-  }`;
+  const showDelete = isLoggedIn && !card.isDefault;
+
+  const showRemoveForMe = isLoggedIn && card.isDefault;
 
   return (
     <div
@@ -24,21 +24,34 @@ function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
           className="modal__close_type_white"
           type="button"
           onClick={onClose}
-        ></button>
+        />
+
         <img className="modal__image" src={card.imageUrl} alt={card.name} />
-        <div className={isOwn ? 'modal__footer_own' : 'modal__footer'}>
+
+        <div className="modal__footer">
           <div className="modal__left-section">
             <h2 className="modal__caption">{card.name}</h2>
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
+
           <div className="modal__right-section">
-            {isOwn && (
+            {showDelete && (
               <button
-                className={cardDeleteButtonClassName}
+                className="modal__delete-button modal__delete-button_visible"
                 type="button"
                 onClick={onDeleteConfirm}
               >
                 Delete item
+              </button>
+            )}
+
+            {showRemoveForMe && (
+              <button
+                className="modal__delete-button modal__delete-button_visible"
+                type="button"
+                onClick={onDeleteConfirm}
+              >
+                Remove for me
               </button>
             )}
           </div>
@@ -47,4 +60,5 @@ function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
     </div>
   );
 }
+
 export default ItemModal;

@@ -49,6 +49,7 @@
   margin: 0;
   color: #000;
   text-decoration: none;
+  font-style: italic;
 }
 .header__avatar {
   width: 40px;

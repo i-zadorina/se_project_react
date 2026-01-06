@@ -25,16 +25,38 @@ const request = (url, options) => {
   return fetch(`${apiBase}/${url}`, options).then(checkResponse);
 };
 
+const authHeaders = () => {
+  const token = getToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
 const getItems = () => {
   return request(`items`);
 };
 
-const addItem = ({ name, imageUrl, weather }, token) => {
+const hideDefaultItem = (seedId) => {
+  return request(`users/me/hidden-default-items/${seedId}`, {
+    method: 'PUT',
+    headers: {
+      ...authHeaders(),
+    },
+  });
+};
+
+const unhideDefaultItem = (seedId) => {
+  return request(`users/me/hidden-default-items/${seedId}`, {
+    method: 'DELETE',
+    headers: {
+      ...authHeaders(),
+    },
+  });
+};
+
+const addItem = ({ name, imageUrl, weather }) => {
   return request(`items`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      ...authHeaders(),
     },
     body: JSON.stringify({ name, imageUrl, weather }),
   });
@@ -45,26 +67,25 @@ const deleteCard = (cardId) => {
   return request(`items/${cardId}`, {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      ...authHeaders(),
     },
   });
 };
 
-const addCardLike = (cardId, token) => {
+const addCardLike = (cardId) => {
   return request(`items/${cardId}/likes`, {
     method: 'PUT',
     headers: {
-      Authorization: `Bearer ${token}`,
+      ...authHeaders(),
     },
   });
 };
 
-const removeCardLike = (cardId, token) => {
+const removeCardLike = (cardId) => {
   return request(`items/${cardId}/likes`, {
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${token}`,
+      ...authHeaders(),
     },
   });
 };
@@ -77,4 +98,6 @@ export {
   deleteCard,
   addCardLike,
   removeCardLike,
+  hideDefaultItem,
+  unhideDefaultItem,
 };

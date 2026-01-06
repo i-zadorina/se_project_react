@@ -31,7 +31,6 @@ const Login = ({
       activeModal={activeModal}
     >
       <label className="modal__input_type_email">
-        Email
         <input
           type="email"
           className="modal__input"
@@ -44,7 +43,6 @@ const Login = ({
         />
       </label>
       <label className="modal__input_type_password">
-        Password
         <input
           type="password"
           className="modal__input"

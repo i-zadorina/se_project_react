@@ -34,7 +34,6 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
       onSubmit={handleSubmit}
     >
       <label className="modal__input_type_name">
-        Name{' '}
         <input
           type="text"
           className="modal__input"
@@ -46,7 +45,6 @@ const AddItemModal = ({ onAddItem, onClose, isOpen, isLoading }) => {
         />
       </label>
       <label className="modal__input_type_image">
-        Image{' '}
         <input
           type="url"
           className="modal__input"

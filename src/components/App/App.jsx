@@ -20,6 +20,7 @@ import {
   deleteCard,
   addCardLike,
   removeCardLike,
+  hideDefaultItem,
 } from '../../utils/api';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
 import ConfirmLogOutModal from '../ConfirmLogOutModal/ConfirmLogOutModal.jsx';
@@ -30,6 +31,7 @@ import Login from '../Login/LoginModal';
 import { setToken, getToken, removeToken } from '../../utils/token';
 import AppContext from '../../contexts/AppContext';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { defaultClothingItems } from '../../utils/constants.js';
 
 function App() {
   //useState hooks
@@ -162,28 +164,21 @@ function App() {
 
   //Cards, Items
   const handleCardLike = ({ id, isLiked }) => {
-    const jwt = getToken();
+    if (!id) return;
 
-    !isLiked
-      ? addCardLike(id, jwt)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
-            );
-          })
-          .catch((err) => console.log(err))
-      : removeCardLike(id, jwt)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
-            );
-          })
-          .catch((err) => console.log(err));
+    const requestFn = isLiked ? removeCardLike : addCardLike;
+
+    requestFn(id)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((it) => (it._id === updatedCard._id ? updatedCard : it)),
+        );
+      })
+      .catch(console.error);
   };
 
   const onAddItem = (values) => {
-    const jwt = getToken();
-    addItem(values, jwt)
+    addItem(values)
       .then((newItem) => {
         setClothingItems((clothingItems) => [newItem.data, ...clothingItems]);
         closeActiveModal();
@@ -194,6 +189,21 @@ function App() {
   };
 
   const onDeleteItem = () => {
+    const card = selectedCard;
+    if (!card?._id) return;
+
+    if (card.isDefault) {
+      if (!card.seedId) return;
+      hideDefaultItem(card.seedId)
+        .then((res) => {
+          setCurrentUser(res.data);
+          closeActiveModal();
+        })
+        .catch(console.error);
+
+      return;
+    }
+
     deleteCard(selectedCard._id)
       .then(() => {
         setClothingItems(
@@ -207,12 +217,30 @@ function App() {
   };
 
   useEffect(() => {
+    let cancelled = false;
+
     getItems()
       .then((data) => {
-        setClothingItems(data.reverse());
+        if (cancelled) return;
+        setClothingItems(Array.isArray(data) ? data.slice().reverse() : []);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error('getItems failed:', err);
+        if (!cancelled) setClothingItems([]);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  const hidden = currentUser?.hiddenDefaultItems ?? [];
+
+  const visibleClothingItems = clothingItems.filter((item) => {
+    if (!item?.isDefault) return true;
+    if (!item?.seedId) return true;
+    return !hidden.includes(item.seedId);
+  });
 
   // Weather
   const handleToggleSwitchChange = () => {
@@ -297,7 +325,7 @@ function App() {
                       weatherData={weatherData}
                       weatherTemp={temp}
                       onCardClick={handleCardClick}
-                      defaultClothingItems={clothingItems}
+                      clothingItems={visibleClothingItems}
                       onCardLike={handleCardLike}
                     />
                   }
@@ -307,7 +335,7 @@ function App() {
                   element={
                     <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <Profile
-                        defaultClothingItems={clothingItems}
+                        clothingItems={visibleClothingItems}
                         onCardClick={handleCardClick}
                         handleAddClick={handleAddClick}
                         handleEditClick={handleEditClick}

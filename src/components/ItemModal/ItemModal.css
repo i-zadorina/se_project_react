@@ -83,7 +83,15 @@
     height: auto;
     aspect-ratio: 1 / 1;
   }
-  .modal__caption {
+  .modal__caption,
+  .modal__weather,
+  .modal__delete-button {
     font-size: 18px;
+  }
+  .modal__left-section {
+    margin-left: 24px;
+  }
+  .modal__right-section {
+    margin-right: 24px;
   }
 }

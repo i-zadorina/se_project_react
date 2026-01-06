@@ -42,13 +42,12 @@ function EditProfileModal({
       activeModal={activeModal}
     >
       <label className="modal__label">
-        Name *{' '}
         <input
           className="modal__input"
           id="edit-name"
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Name*"
           minLength="2"
           maxLength="40"
           required
@@ -58,13 +57,12 @@ function EditProfileModal({
       </label>
 
       <label className="modal__label">
-        Avatar *{' '}
         <input
           type="url"
           className="modal__input"
           id="edit-avatar"
           name="avatar"
-          placeholder="Avatar URL"
+          placeholder="Avatar URL*"
           minLength="2"
           maxLength="200"
           required

@@ -33,12 +33,11 @@ const Register = ({
       activeModal={activeModal}
     >
       <label className="modal__input_type_name">
-        Name*:
         <input
           type="text"
           className="modal__input"
           id="name"
-          placeholder="Name"
+          placeholder="Name*"
           required
           value={values.name}
           onChange={handleChange}
@@ -46,12 +45,11 @@ const Register = ({
         />
       </label>
       <label className="modal__input_type_email">
-        Email*:
         <input
           type="email"
           className="modal__input"
           id="email"
-          placeholder="Email"
+          placeholder="Email*"
           required
           value={values.email}
           onChange={handleChange}
@@ -59,12 +57,11 @@ const Register = ({
         />
       </label>
       <label className="modal__input_type_password">
-        Password*:
         <input
           type="password"
           className="modal__input"
           id="password"
-          placeholder="Password"
+          placeholder="Password*"
           required
           value={values.password}
           onChange={handleChange}
@@ -72,14 +69,12 @@ const Register = ({
         />
       </label>
       <label className="modal__input_type_avatar">
-        Avatar URL*
         <input
           className="modal__input"
           type="url"
           id="avatar"
           name="avatar"
           placeholder="Avatar URL"
-          required
           value={values.avatar}
           onChange={handleChange}
         />
