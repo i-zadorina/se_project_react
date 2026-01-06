@@ -3,7 +3,7 @@ import AppContext from '../../contexts/AppContext';
 import '../ModalWithForm/ModalWithForm.css';
 import './ItemModal.css';
 
-function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
+function ItemModal({ isOpen, onClose, card, onDeleteConfirm, onDeleteItem }) {
   const { isLoggedIn } = useContext(AppContext);
 
   if (!card) return null;
@@ -49,7 +49,7 @@ function ItemModal({ isOpen, onClose, card, onDeleteConfirm }) {
               <button
                 className="modal__delete-button modal__delete-button_visible"
                 type="button"
-                onClick={onDeleteConfirm}
+                onClick={onDeleteItem}
               >
                 Remove for me
               </button>

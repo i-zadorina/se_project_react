@@ -31,7 +31,6 @@ import Login from '../Login/LoginModal';
 import { setToken, getToken, removeToken } from '../../utils/token';
 import AppContext from '../../contexts/AppContext';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { defaultClothingItems } from '../../utils/constants.js';
 
 function App() {
   //useState hooks
@@ -99,6 +98,21 @@ function App() {
     };
   }, [activeModal]);
 
+  const loadItems = () => {
+    return getItems()
+      .then((data) => {
+        setClothingItems(Array.isArray(data) ? data.slice().reverse() : []);
+      })
+      .catch((err) => {
+        console.error('getItems failed:', err);
+        setClothingItems([]);
+      });
+  };
+
+  useEffect(() => {
+    loadItems();
+  }, []);
+
   // SignUp, Login
   const handleRegistration = ({ name, avatar, email, password }) => {
     setIsLoading(true);
@@ -127,6 +141,7 @@ function App() {
         setCurrentUser(user.data);
         setIsLoggedIn(true);
         closeActiveModal();
+        loadItems();
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
@@ -135,6 +150,8 @@ function App() {
   const handleLogOut = () => {
     removeToken();
     setIsLoggedIn(false);
+    setCurrentUser({ name: '', avatar: '', hiddenDefaultItems: [] });
+    loadItems();
     closeActiveModal();
   };
 
@@ -150,17 +167,19 @@ function App() {
 
   useEffect(() => {
     const jwt = getToken();
-    if (!jwt) {
-      return;
-    }
+    if (!jwt) return;
+
     auth
       .getUserInfo(jwt)
       .then((res) => {
         setCurrentUser(res.data);
         setIsLoggedIn(true);
       })
-      .catch(console.error);
-  }, [isLoggedIn]);
+      .catch((e) => {
+        console.error(e);
+        removeToken();
+      });
+  }, []);
 
   //Cards, Items
   const handleCardLike = ({ id, isLiked }) => {
@@ -215,24 +234,6 @@ function App() {
       })
       .catch(console.error);
   };
-
-  useEffect(() => {
-    let cancelled = false;
-
-    getItems()
-      .then((data) => {
-        if (cancelled) return;
-        setClothingItems(Array.isArray(data) ? data.slice().reverse() : []);
-      })
-      .catch((err) => {
-        console.error('getItems failed:', err);
-        if (!cancelled) setClothingItems([]);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const hidden = currentUser?.hiddenDefaultItems ?? [];
 
@@ -372,6 +373,7 @@ function App() {
                 card={selectedCard}
                 onClose={closeActiveModal}
                 onDeleteConfirm={handleDeleteCardClick}
+                onDeleteItem={onDeleteItem}
               />
             )}
             {activeModal === 'delete-confirmation' && (

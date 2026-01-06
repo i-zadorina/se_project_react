@@ -31,7 +31,12 @@ const authHeaders = () => {
 };
 
 const getItems = () => {
-  return request(`items`);
+  const token = getToken();
+  return request('items', {
+    headers: {
+      ...authHeaders(),
+    },
+  });
 };
 
 const hideDefaultItem = (seedId) => {
@@ -56,6 +61,7 @@ const addItem = ({ name, imageUrl, weather }) => {
   return request(`items`, {
     method: 'POST',
     headers: {
+      'Content-Type': 'application/json',
       ...authHeaders(),
     },
     body: JSON.stringify({ name, imageUrl, weather }),
