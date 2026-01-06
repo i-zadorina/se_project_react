@@ -26,7 +26,9 @@ function ItemModal({ isOpen, onClose, card, onDeleteConfirm, onDeleteItem }) {
           onClick={onClose}
         />
 
-        <img className="modal__image" src={card.imageUrl} alt={card.name} />
+        <div className="modal__media">
+          <img className="modal__image" src={card.imageUrl} alt={card.name} />
+        </div>
 
         <div className="modal__footer">
           <div className="modal__left-section">
