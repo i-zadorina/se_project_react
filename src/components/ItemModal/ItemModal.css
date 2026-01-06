@@ -7,7 +7,7 @@
   position: relative;
 }
 .modal__close_type_white {
-  background-image: url(../../images/close-preview.svg);
+  background-image: url('../../images/close-preview.svg');
   border: none;
   position: absolute;
   top: 26px;

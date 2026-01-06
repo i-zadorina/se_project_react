@@ -44,7 +44,7 @@
   width: 20px;
   height: 20px;
   border: none;
-  background-image: url(../../images/close.svg);
+  background-image: url('../../images/close.svg');
   cursor: pointer;
   background-color: transparent;
 }

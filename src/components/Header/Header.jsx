@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import logo from "../../images/logo.svg";
-import "./Header.css";
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import logo from '../../images/logo.svg';
+import './Header.css';
 
 function Header({
   handleAddClick,
@@ -12,9 +12,9 @@ function Header({
   weatherData,
   isLoggedIn,
 }) {
-  const currentDate = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
+  const currentDate = new Date().toLocaleString('default', {
+    month: 'long',
+    day: 'numeric',
   });
 
   const { currentUser } = useContext(CurrentUserContext);
@@ -22,7 +22,7 @@ function Header({
   return (
     <header className="header">
       <div className="header__left">
-        <Link to={"/"}>
+        <Link to={'/'}>
           <img className="header__logo" src={logo} alt="Logo" />
         </Link>
         <p className="header__date-and-location">
@@ -47,7 +47,7 @@ function Header({
               <img className="header__avatar" src={currentUser?.avatar} />
             ) : (
               <div className="header__avatar-placeholder">
-                {currentUser.name ? currentUser.name[0].toUpperCase() : ""}
+                {currentUser.name ? currentUser.name[0].toUpperCase() : ''}
               </div>
             )}
           </div>

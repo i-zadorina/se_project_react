@@ -75,41 +75,22 @@ export const weatherOptions = [
   },
 ];
 
-export const defaultClothingItems = [
-  {
-    _id: 'default-cap',
-    name: 'Cap',
-    weather: 'hot',
-    imageUrl: new URL('../images/defaultClothes/Cap.png', import.meta.url).href,
-  },
-  {
-    _id: 'default-hoodie',
-    name: 'Hoodie',
-    weather: 'warm',
-    imageUrl: new URL('../images/defaultClothes/Hoodie.png', import.meta.url).href,
-  },
-  {
-    _id: 'default-jacket',
-    name: 'Jacket',
-    weather: 'cold',
-    imageUrl: new URL('../images/defaultClothes/Jacket.png', import.meta.url).href,
-  },
-  {
-    _id: 'default-sneakers',
-    name: 'Sneakers',
-    weather: 'warm',
-    imageUrl: new URL('../images/defaultClothes/Sneakers.png', import.meta.url).href,
-  },
-  {
-    _id: 'default-tshirt',
-    name: 'T-Shirt',
-    weather: 'hot',
-    imageUrl: new URL('../images/defaultClothes/T-Shirt.png', import.meta.url).href,
-  },
-  {
-    _id: 'default-coat',
-    name: 'Coat',
-    weather: 'cold',
-    imageUrl: new URL('../images/defaultClothes/Coat.png', import.meta.url).href,
-  },
+const DEFAULT_CLOTHES = [
+  { file: 'Cap', weather: 'hot' },
+  { file: 'Hoodie', weather: 'warm' },
+  { file: 'Jacket', weather: 'cold' },
+  { file: 'Sneakers', weather: 'warm' },
+  { file: 'T-Shirt', weather: 'hot' },
+  { file: 'Coat', weather: 'cold' },
 ];
+
+export const defaultClothingItems = DEFAULT_CLOTHES.map(
+  ({ file, weather }) => ({
+    _id: `default-${file.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+    name: file,
+    weather,
+    isDefault: true,
+    seedId: file,
+    imageUrl: `/defaultClothes/${file}.png`,
+  }),
+);
