@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import React, { Suspense } from 'react';
 import './App.css';
 import Header from '../Header/Header';
-import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
-import Profile from '../Profile/Profile';
 import EditProfileModal from '../EditProfileModal/EditProfileModal.jsx';
 import {
   latitude as DEFAULT_LAT,
@@ -31,6 +30,9 @@ import Login from '../Login/LoginModal';
 import { setToken, getToken, removeToken } from '../../utils/token';
 import AppContext from '../../contexts/AppContext';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
+const Main = React.lazy(() => import('../Main/Main'));
+const Profile = React.lazy(() => import('../Profile/Profile'));
 
 function App() {
   //useState hooks
@@ -141,7 +143,9 @@ function App() {
         setCurrentUser(user.data);
         setIsLoggedIn(true);
         closeActiveModal();
-        loadItems();
+        setTimeout(() => {
+          loadItems();
+        }, 0);
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
@@ -317,46 +321,48 @@ function App() {
                 weatherData={weatherData}
                 isLoggedIn={isLoggedIn}
               />
-              <Routes>
-                <Route
-                  exact
-                  path="/"
-                  element={
-                    <Main
-                      weatherData={weatherData}
-                      weatherTemp={temp}
-                      onCardClick={handleCardClick}
-                      clothingItems={visibleClothingItems}
-                      onCardLike={handleCardLike}
-                    />
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={
-                    <ProtectedRoute isLoggedIn={isLoggedIn}>
-                      <Profile
-                        clothingItems={visibleClothingItems}
+              <Suspense fallback={null}>
+                <Routes>
+                  <Route
+                    exact
+                    path="/"
+                    element={
+                      <Main
+                        weatherData={weatherData}
+                        weatherTemp={temp}
                         onCardClick={handleCardClick}
-                        handleAddClick={handleAddClick}
-                        handleEditClick={handleEditClick}
+                        clothingItems={visibleClothingItems}
                         onCardLike={handleCardLike}
-                        handleLogOutClick={handleLogOutClick}
                       />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="*"
-                  element={
-                    isLoggedIn ? (
-                      <Navigate to="/" replace />
-                    ) : (
-                      <Navigate to="/login" replace />
-                    )
-                  }
-                />
-              </Routes>
+                    }
+                  />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute isLoggedIn={isLoggedIn}>
+                        <Profile
+                          clothingItems={visibleClothingItems}
+                          onCardClick={handleCardClick}
+                          handleAddClick={handleAddClick}
+                          handleEditClick={handleEditClick}
+                          onCardLike={handleCardLike}
+                          handleLogOutClick={handleLogOutClick}
+                        />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="*"
+                    element={
+                      isLoggedIn ? (
+                        <Navigate to="/" replace />
+                      ) : (
+                        <Navigate to="/login" replace />
+                      )
+                    }
+                  />
+                </Routes>
+              </Suspense>
               <Footer />
             </div>
             {activeModal === 'add-garment' && (

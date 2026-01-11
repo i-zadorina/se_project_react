@@ -20,7 +20,7 @@ function Main({
       <WeatherCard weatherData={weatherData} weatherTemp={temp} />
       <section className="cards">
         <p className="cards__text">
-          Today is {temp} &deg;{currentTemperatureUnit}/ You may want to wear:
+          Today is {temp} &deg;{currentTemperatureUnit}. You may want to wear:
         </p>
         <ul className="cards__list">
           {list

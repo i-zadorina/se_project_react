@@ -42,6 +42,10 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         className="card__image"
         src={item.imageUrl}
         alt={`Image of ${item.name}`}
+        loading="lazy"
+        decoding="async"
+        width="500"
+        height="500"
         onClick={handleCardClick}
       />
     </li>

@@ -44,7 +44,15 @@ function Header({
               <p className="header__username">{currentUser?.name}</p>
             </Link>
             {currentUser.avatar ? (
-              <img className="header__avatar" src={currentUser?.avatar} />
+              <img
+                className="header__avatar"
+                src={currentUser?.avatar}
+                alt="User avatar"
+                loading="lazy"
+                decoding="async"
+                width="40"
+                height="40"
+              />
             ) : (
               <div className="header__avatar-placeholder">
                 {currentUser.name ? currentUser.name[0].toUpperCase() : ''}
