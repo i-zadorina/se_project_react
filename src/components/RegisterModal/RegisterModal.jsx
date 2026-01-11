@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from '../../hooks/UseForm';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './RegisterModal.css';
@@ -14,12 +15,18 @@ const Register = ({
     email: '',
     password: '',
     name: '',
-    avatar: '',
   });
+
+  const [avatarFile, setAvatarFile] = useState(null);
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0] ?? null;
+    setAvatarFile(file);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(values);
+    handleRegistration({ ...values, avatarFile });
   };
 
   return (
@@ -71,12 +78,12 @@ const Register = ({
       <label className="modal__input_type_avatar">
         <input
           className="modal__input"
-          type="url"
+          type="file"
           id="avatar"
           name="avatar"
           placeholder="Avatar URL"
-          value={values.avatar}
-          onChange={handleChange}
+          accept="image/png,image/jpeg,image/webp"
+          onChange={handleAvatarChange}
         />
       </label>
       <button
