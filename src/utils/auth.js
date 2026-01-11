@@ -35,7 +35,7 @@ const getUserInfo = (token) => {
   });
 };
 
-const updateUser = ({ name, avatar }) => {
+const updateUserName = ({ name }) => {
   const token = getToken();
   return request('users/me', {
     method: 'PATCH',
@@ -43,8 +43,23 @@ const updateUser = ({ name, avatar }) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name, avatar }),
+    body: JSON.stringify({ name }),
   });
 };
 
-export { signUp, signIn, updateUser, getUserInfo };
+const uploadAvatar = (file) => {
+  const token = getToken();
+
+  const fd = new FormData();
+  fd.append('avatar', file);
+
+  return request('users/me/avatar', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: fd,
+  });
+};
+
+export { signUp, signIn, getUserInfo, updateUserName, uploadAvatar };

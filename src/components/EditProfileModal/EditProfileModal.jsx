@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useForm } from '../../hooks/UseForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
@@ -6,7 +6,8 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 function EditProfileModal({
   isOpen,
   onClose,
-  updateUser,
+  updateUserName, // PATCH /users/me
+  uploadAvatar, // POST /users/me/avatar
   activeModal,
   isLoading,
 }) {
@@ -14,20 +15,33 @@ function EditProfileModal({
 
   const { values, handleChange, setValues } = useForm({
     name: currentUser.name || '',
-    avatar: currentUser.avatar || '',
   });
 
-  const handleSubmit = (e) => {
+  const [avatarFile, setAvatarFile] = useState(null);
+
+  const handleAvatarChange = (e) => {
+    setAvatarFile(e.target.files?.[0] ?? null);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    updateUser(values);
-    onClose();
+
+    try {
+      await updateUserName({ name: values.name });
+
+      if (avatarFile) {
+        await uploadAvatar(avatarFile);
+      }
+
+      onClose();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
-    setValues({
-      name: currentUser.name || '',
-      avatar: currentUser.avatar || '',
-    });
+    setValues({ name: currentUser.name || '' });
+    setAvatarFile(null);
   }, [currentUser, setValues]);
 
   return (
@@ -58,16 +72,13 @@ function EditProfileModal({
 
       <label className="modal__label">
         <input
-          type="url"
+          type="file"
           className="modal__input"
           id="edit-avatar"
           name="avatar"
-          placeholder="Avatar URL*"
-          minLength="2"
-          maxLength="200"
-          required
-          value={values.avatar}
-          onChange={handleChange}
+          placeholder="Change your Avatar*"
+          accept="image/png,image/jpeg,image/webp"
+          onChange={handleAvatarChange}
         />
       </label>
     </ModalWithForm>

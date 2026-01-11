@@ -159,14 +159,24 @@ function App() {
     closeActiveModal();
   };
 
-  const handleUpdateUser = (data) => {
-    auth
-      .updateUser(data)
+  const handleUpdateUserName = ({ name }) => {
+    setIsLoading(true);
+    return auth
+      .updateUserName({ name })
       .then((res) => {
         setCurrentUser(res.data);
-        closeActiveModal();
       })
-      .catch(console.error);
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleUploadAvatar = (file) => {
+    setIsLoading(true);
+    return auth
+      .uploadAvatar(file)
+      .then((res) => {
+        setCurrentUser(res.data);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -413,7 +423,8 @@ function App() {
             <EditProfileModal
               isOpen={activeModal === 'edit-profile'}
               onClose={closeActiveModal}
-              updateUser={handleUpdateUser}
+              updateUserName={handleUpdateUserName}
+              uploadAvatar={handleUploadAvatar}
               isLoading={isLoading}
             />
           )}

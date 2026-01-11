@@ -82,6 +82,7 @@
   font-size: 1em;
   line-height: 1.5;
   cursor: pointer;
+  background-color: transparent;
 }
 .header__login-btn {
   margin: 0;
@@ -92,6 +93,7 @@
   font-size: 1em;
   line-height: 1.5;
   cursor: pointer;
+  background-color: transparent;
 }
 
 @media (max-width: 640px) {

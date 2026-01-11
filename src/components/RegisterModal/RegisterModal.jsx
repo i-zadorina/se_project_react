@@ -11,7 +11,7 @@ const Register = ({
   activeModal,
   isLoading,
 }) => {
-  const { values, handleChange } = useForm({
+  const { values, handleChange, setValues } = useForm({
     email: '',
     password: '',
     name: '',
@@ -20,8 +20,7 @@ const Register = ({
   const [avatarFile, setAvatarFile] = useState(null);
 
   const handleAvatarChange = (e) => {
-    const file = e.target.files?.[0] ?? null;
-    setAvatarFile(file);
+    setAvatarFile(e.target.files?.[0] ?? null);
   };
 
   const handleSubmit = (e) => {
@@ -81,7 +80,7 @@ const Register = ({
           type="file"
           id="avatar"
           name="avatar"
-          placeholder="Avatar URL"
+          placeholder="Upload your avatar"
           accept="image/png,image/jpeg,image/webp"
           onChange={handleAvatarChange}
         />
